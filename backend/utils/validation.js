@@ -1,7 +1,6 @@
 // backend/utils/validation.js
 const { validationResult } = require('express-validator');
 
-// Validation handler
 // middleware for formatting errors from express-validator middleware
 // (to customize, see express-validator's documentation)
 const handleValidationErrors = (req, res, next) => {
@@ -17,7 +16,7 @@ const handleValidationErrors = (req, res, next) => {
         err.errors = errors;
         err.status = 400;
         err.title = 'Bad request.';
-        next();
+        next(err);
     }
     next();
 };
