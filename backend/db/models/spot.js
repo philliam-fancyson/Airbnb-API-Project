@@ -10,7 +10,13 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Spot.hasMany(models.SpotImage, { foreignKey: 'spotId' })
+      Spot.hasMany(models.SpotImage, {
+        foreignKey: 'spotId',
+      })
+      Spot.hasMany(models.SpotImage, {
+        foreignKey: 'spotId',
+        as: 'previewImage',
+      });
     }
   }
   Spot.init({
