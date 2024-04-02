@@ -192,10 +192,38 @@ router.put('/:spotId', requireAuth, async(req, res, next) => {
     spot.description = description;
     spot.price = price;
 
-    console.log(spot)
     await spot.save();
 
     res.json(spot);
-})
+});
+
+router.delete('/:spotId', requireAuth, async(req, res, next) => {
+    const { user } = req;
+
+    const spot = await Spot.findByPk(req.params.spotId)
+        // Check if spot exists
+    if (!spot) {
+        const err = new Error(`Spot couldn't be found`);
+        err.title = "Resource Not Found";
+        err.errors = { message: `Spot couldn't be found`};
+        err.status = 404;
+        return next(err);
+
+    }
+    // Checks if user owns the spot
+    if (user.id !== spot.ownerId) {
+        const err = new Error("Spot must belong to the current user.");
+        err.title = "Forbidden";
+        err.errors = { message: "Forbidden" };
+        err.status = 403;
+        return next(err);
+    }
+
+    await spot.destroy();
+
+    res.json({
+        messsage: "Successfully deleted"
+    });
+});
 
 module.exports = router;

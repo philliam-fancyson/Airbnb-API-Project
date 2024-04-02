@@ -10,13 +10,23 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      Spot.belongsTo(models.User, {foreignKey: 'ownerId'})
+
       Spot.hasMany(models.SpotImage, {
         foreignKey: 'spotId',
       })
+      // alias that makes the query work in routes
       Spot.hasMany(models.SpotImage, {
         foreignKey: 'spotId',
         as: 'previewImage',
       });
+
+      Spot.belongsToMany(models.User, {
+        through: models.Review,
+        foreignKey: 'spotId',
+        otherKey: 'userId',
+      })
+
     }
   }
   Spot.init({
