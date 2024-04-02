@@ -21,35 +21,32 @@ module.exports = {
       },
       address: {
         type: Sequelize.STRING,
-        allowNull: false,
       },
       city: {
         type: Sequelize.STRING,
-        allowNull: false,
       },
       state: {
         type: Sequelize.STRING,
-        allowNull: false,
       },
       country: {
         type: Sequelize.STRING,
-        allowNull: false,
       },
       lat: {
-        type: Sequelize.FLOAT
+        type: Sequelize.DECIMAL
       },
       lng: {
-        type: Sequelize.FLOAT
+        type: Sequelize.DECIMAL
       },
       name: {
         type: Sequelize.STRING,
         allowNull: false
       },
       description: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       price: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL
       },
       createdAt: {
         allowNull: false,
@@ -64,10 +61,6 @@ module.exports = {
       avgRating: {
         type: Sequelize.DECIMAL
       },
-      previewImage: {
-        // might have to use Buffer https://nodejs.org/api/buffer.html
-        type: Sequelize.BLOB
-      }
     }, options);
   },
   async down(queryInterface, Sequelize) {

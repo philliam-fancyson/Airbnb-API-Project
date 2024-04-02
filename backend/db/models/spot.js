@@ -20,25 +20,21 @@ module.exports = (sequelize, DataTypes) => {
     },
     address: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     city: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     state: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     country: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     lat: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.DECIMAL,
     },
     lng: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.DECIMAL,
     },
     name: {
       type: DataTypes.STRING,
@@ -46,16 +42,14 @@ module.exports = (sequelize, DataTypes) => {
     },
     description: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
     price: {
-      type: DataTypes.INTEGER
+      type: DataTypes.DECIMAL
     },
     avgRating: {
       type: DataTypes.DECIMAL
     },
-    previewImage: {
-      type: DataTypes.BLOB
-    }
   }, {
     sequelize,
     modelName: 'Spot',

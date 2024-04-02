@@ -23,7 +23,6 @@ module.exports = {
         description: `Dis map ain't big enough for da two of us!`,
         price: 123,
         avgRating: 1.0,
-        previewImage: 'image url'
       },
       {
         ownerId: 4,
@@ -37,7 +36,6 @@ module.exports = {
         description: `Is this a JoJo reference?`,
         price: 198,
         avgRating: 4.2,
-        previewImage: 'image url'
       },
       {
         ownerId: 5,
@@ -51,7 +49,6 @@ module.exports = {
         description: `Nothing matters`,
         price: 202,
         avgRating: 5.0,
-        previewImage: 'image url'
       },
     ])
 
