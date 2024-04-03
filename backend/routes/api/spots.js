@@ -26,7 +26,8 @@ router.get('/', async (req, res) => {
                 attributes: [],
                 where: {
                     preview: true
-                }
+                },
+                required: false
             },
             {
                 model: Review,
