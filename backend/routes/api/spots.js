@@ -87,7 +87,6 @@ router.get('/:spotId', async(req, res) => {
     const spot = await Spot.findByPk(req.params.spotId, {
         attributes: {
             include: [
-                // SpotImage is causing duplicates
                 [Sequelize.fn('COUNT', Sequelize.col('Reviews.spotId')), 'numReviews'],
                 [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgStarRating'],
             ]
@@ -107,7 +106,7 @@ router.get('/:spotId', async(req, res) => {
                 attributes: ['id', 'firstName', 'lastName'],
             }
         ],
-        group: ['Spot.id', 'SpotImages.id']
+        group: ['Spot.id', 'SpotImages.id', 'Owner.id']
     });
     if (spot) {
         res.json(spot);
