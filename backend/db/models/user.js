@@ -17,7 +17,9 @@ module.exports = (sequelize, DataTypes) => {
         through: models.Review,
         foreignKey: 'userId',
         otherKey: 'spotId',
-      })
+      });
+
+      User.hasMany(models.Review, { foreignKey: 'userId'});
     }
   }
   User.init({

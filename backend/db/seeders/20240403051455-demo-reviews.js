@@ -100,6 +100,7 @@ module.exports = {
     options.tableName = 'Reviews';
     const Op  = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
+      // Change this to account for Database changes and delete according to userId
       star : { [Op.between]: [1, 5] }
     }, {})
   }
