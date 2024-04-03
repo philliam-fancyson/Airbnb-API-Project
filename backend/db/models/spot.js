@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Spot.belongsTo(models.User, { foreignKey: 'ownerId' });
+      Spot.belongsTo(models.User, { as: 'Owner', foreignKey: 'ownerId' });
 
       Spot.hasMany(models.SpotImage, {
         foreignKey: 'spotId',
@@ -57,9 +58,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     price: {
-      type: DataTypes.DECIMAL
-    },
-    avgRating: {
       type: DataTypes.DECIMAL
     },
   }, {

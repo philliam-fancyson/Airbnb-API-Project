@@ -6,28 +6,35 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 const { requireAuth } = require('../../utils/auth');
-const { User, Spot, SpotImage } = require('../../db/models');
+const { User, Spot, SpotImage, Review } = require('../../db/models');
 
 const router = express.Router();
 
 // All Spots
 router.get('/', async (req, res) => {
-    const allSpots = await Spot.findAll()
-
-    for (let spot of allSpots) { // This gives us the images. Do the same for aggregate data reviews
-        const previewImage = await SpotImage.findOne({
-            where: {
-                spotId: spot.id,
-                preview: true,
+    const allSpots = await Spot.findAll({
+        logging: console.log,
+        attributes: {
+            include: [
+                [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgRating'],
+                [Sequelize.col('SpotImages.url'), 'previewImage']
+            ]
+        },
+        include: [
+            {
+                model: SpotImage,
+                attributes: [],
+                where: {
+                    preview: true
+                }
+            },
+            {
+                model: Review,
+                attributes: [],
             }
-        });
-        if (!previewImage) {
-            spot.dataValues.previewImage = null;
-        } else {
-            spot.dataValues.previewImage = previewImage.url;
-        }
-    };
-
+        ],
+        group: 'Spot.id'
+    });
 
     res.json({
         Spots: allSpots
@@ -42,21 +49,26 @@ router.get('/current', requireAuth, async(req, res) => {
         where: {
             ownerId: user.id
         },
-    });
-
-    for (let spot of userSpots) {
-        const previewImage = await SpotImage.findOne({ // This gives us the images. Do the same for aggregate data reviews
-            where: {
-                spotId: spot.id,
-                preview: true,
+        attributes: {
+            include: [
+                [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgRating'],
+                [Sequelize.col('SpotImages.url'), 'previewImage']
+            ]
+        },
+        include: [
+            {
+                model: SpotImage,
+                attributes: [],
+                where: {
+                    preview: true
+                }
+            },
+            {
+                model: Review,
+                attributes: [],
             }
-        });
-        if (!previewImage) {
-            spot.dataValues.previewImage = null;
-        } else {
-            spot.dataValues.previewImage = previewImage.url;
-        }
-    };
+        ]
+    });
 
     if (userSpots.length >= 1) {
         res.json({
@@ -72,32 +84,32 @@ router.get('/current', requireAuth, async(req, res) => {
 // :spotId Spot
 router.get('/:spotId', async(req, res) => {
     const spot = await Spot.findByPk(req.params.spotId, {
-        include: { // Fix this too
-            model: SpotImage,
-            attributes: ['id', 'url', 'preview'],
-        }
+        attributes: {
+            include: [
+                // SpotImage is causing duplicates
+                [Sequelize.fn('COUNT', Sequelize.col('Reviews.spotId')), 'numReviews'],
+                [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgStarRating'],
+            ]
+        },
+        include: [
+            {
+                model: Review,
+                attributes: []
+            },
+            {
+                // This model is making the count function count twice. somehow making duplicate rows
+                // Does not affect average; maybe because the extra data points averages it out correctly
+                model: SpotImage,
+                attributes: ['id', 'url', 'preview'],
+            },
+            {
+                model: User,
+                as: 'Owner',
+                attributes: ['id', 'firstName', 'lastName'],
+            }
+        ],
     });
     if (spot) {
-        // const spotOwner = await User.findByPk(spot.ownerId);
-        // const { id, ownerId, address, city, state, country, previewImage,
-        //         lat, lng, name, description, price, createdAt, updatedAt } = spot;
-        // // put in spots here
-        // res.json({
-        //     id, ownerId, address, city, state, country,
-        //     lat, lng, name, description, price, createdAt, updatedAt,
-        //     numReviews: 'placeholder', // Aggregate Data
-
-        //     avgStarRating: 'placeholder', // Aggregate Data
-        //     // Spot data returns associated data for SpotImages, an array of image
-        //     // data including the id, url, and preview
-        //     SpotImages: previewImage.toString(),
-        //     Owner: {
-        //         id: spotOwner.id,
-        //         firstName: spotOwner.firstName,
-        //         lastName: spotOwner.lastName,
-        //     }
-        // })
-
         res.json(spot);
     } else {
         res.statusCode = 404;

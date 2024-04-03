@@ -42,7 +42,6 @@ module.exports = {
         name: '2Fort',
         description: `Dis map ain't big enough for da two of us!`,
         price: 123,
-        avgRating: 1.0,
       },
       {
         ownerId: user2.id,
@@ -55,7 +54,6 @@ module.exports = {
         name: 'Speedwagon Foundation',
         description: `Is this a JoJo reference?`,
         price: 198,
-        avgRating: 4.2,
       },
       {
         ownerId: user2.id,
@@ -68,7 +66,6 @@ module.exports = {
         name: 'Urban Square Towers',
         description: `Wonderful view of the square and the occasional street fights. `,
         price: 100,
-        avgRating: 4.3,
       },
       {
         ownerId: user3.id,
@@ -81,7 +78,6 @@ module.exports = {
         name: 'Laundromat',
         description: `Experience the beautiful reality where nothing matters.`,
         price: 202,
-        avgRating: 5.0,
       },
     ])
 
