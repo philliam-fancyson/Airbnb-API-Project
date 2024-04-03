@@ -59,9 +59,6 @@ module.exports = {
 
     // WhiteReaper Reviews
     const user3 = await User.findOne({ where: { username: Users[2].username }, raw: true });
-    console.log("Here is where Error might be");
-    console.log(user3);
-    console.log("Error not here I guess?")
     await Review.bulkCreate([
       {
       userId: user3.id,
