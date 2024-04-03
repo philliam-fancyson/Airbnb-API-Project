@@ -26,10 +26,10 @@ module.exports = {
       },
       {
         email: 'user2@user.io',
-        username: 'morbius',
-        hashedPassword: bcrypt.hashSync('morbinTime'),
-        firstName: 'Michael',
-        lastName: 'Morbius',
+        username: 'WhiteReaper',
+        hashedPassword: bcrypt.hashSync('wR3=>d2=>wS3=>ggEZ'),
+        firstName: 'Sergei',
+        lastName: 'Dragunov',
       },
       {
         email: 'jotaro-joestar@gmail.com',
@@ -44,6 +44,13 @@ module.exports = {
         hashedPassword: bcrypt.hashSync('nothing@!matters2022'),
         firstName: 'Evelyn',
         lastName: 'Wang'
+      },
+      {
+        email: 'sakura@lesserafim.com',
+        username: 'sakura98',
+        hashedPassword: bcrypt.hashSync('AKB48!HKT48'),
+        firstName: 'Sakura',
+        lastName: 'Miyawaki'
       }
     ])
   },
@@ -57,7 +64,8 @@ module.exports = {
         'funny-userGuy',
         'morbius',
         'Star-Platinum',
-        'laundry-and-taxes'
+        'laundry-and-taxes',
+        'sakura98'
       ]}
     }, {})
   }
