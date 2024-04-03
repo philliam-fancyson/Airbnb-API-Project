@@ -98,8 +98,6 @@ router.get('/:spotId', async(req, res) => {
                 attributes: []
             },
             {
-                // This model is making the count function count twice. somehow making duplicate rows
-                // Does not affect average; maybe because the extra data points averages it out correctly
                 model: SpotImage,
                 attributes: ['id', 'url', 'preview'],
             },
@@ -109,7 +107,7 @@ router.get('/:spotId', async(req, res) => {
                 attributes: ['id', 'firstName', 'lastName'],
             }
         ],
-        group: ['Spot.id', 'SpotImages.url']
+        group: ['Spot.id', 'SpotImages.id']
     });
     if (spot) {
         res.json(spot);
