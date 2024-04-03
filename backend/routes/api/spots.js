@@ -12,16 +12,23 @@ const router = express.Router();
 
 // All Spots
 router.get('/', async (req, res) => {
-    const allSpots = await Spot.findAll({
-        include: { // Fix preview image appearing as an array with an object
-            model: SpotImage,
-            as: 'previewImage',
-            attributes: ['url'],
+    const allSpots = await Spot.findAll()
+
+    for (let spot of allSpots) {
+        const previewImage = await SpotImage.findOne({
             where: {
-                preview: true
-            },
+                spotId: spot.id,
+                preview: true,
+            }
+        });
+        if (!previewImage) {
+            spot.dataValues.previewImage = null;
+        } else {
+            spot.dataValues.previewImage = previewImage.url;
         }
-    })
+    };
+
+
     res.json({
         Spots: allSpots
     });
@@ -35,15 +42,21 @@ router.get('/current', requireAuth, async(req, res) => {
         where: {
             ownerId: user.id
         },
-        include: { // Fix this too
-            model: SpotImage,
-            as: 'previewImage',
-            attributes: ['url'],
-            where: {
-                preview: true
-            },
-        }
     });
+
+    for (let spot of userSpots) {
+        const previewImage = await SpotImage.findOne({
+            where: {
+                spotId: spot.id,
+                preview: true,
+            }
+        });
+        if (!previewImage) {
+            spot.dataValues.previewImage = null;
+        } else {
+            spot.dataValues.previewImage = previewImage.url;
+        }
+    };
 
     if (userSpots.length >= 1) {
         res.json({
@@ -112,7 +125,7 @@ router.post('/', requireAuth, async(req, res, next) => {
         price
     });
 
-    newSpot.save();
+    await newSpot.save();
     res.statusCode = 201;
     res.setHeader('Content-Type', 'application/json')
     res.json(newSpot);
@@ -148,7 +161,7 @@ router.post('/:spotId/images', requireAuth, async(req, res, next) => {
         preview
     })
 
-    newSpotImage.save();
+    await newSpotImage.save();
 
     res.json({
         id: newSpotImage.id,

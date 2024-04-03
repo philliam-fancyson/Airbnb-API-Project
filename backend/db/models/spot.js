@@ -15,11 +15,6 @@ module.exports = (sequelize, DataTypes) => {
       Spot.hasMany(models.SpotImage, {
         foreignKey: 'spotId',
       })
-      // alias that makes the query work in routes
-      Spot.hasMany(models.SpotImage, {
-        foreignKey: 'spotId',
-        as: 'previewImage',
-      });
 
       Spot.belongsToMany(models.User, {
         through: models.Review,
