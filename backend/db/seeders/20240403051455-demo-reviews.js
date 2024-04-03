@@ -31,14 +31,9 @@ module.exports = {
     const spot3 = await Spot.findOne({ raw: true, where: { name: Spots[2].name} })
     const spot4 = await Spot.findOne({ raw: true, where: { name: Spots[3].name} })
 
-    console.log(spot1)
-    console.log(spot2)
-    console.log(spot3)
-    console.log(spot4)
-
     // Demoman Reviews
     const user1 = await User.findOne({ where: { username: Users[0].username }, raw: true });
-    console.log(user1);
+    console.log(user1.id);
     await Review.create({
       userId: user1.id,
       spotId: spot1.id,
@@ -48,6 +43,7 @@ module.exports = {
 
     // funny-userGuy Reviews
     const user2 = await User.findOne({ where: { username: Users[1].username }, raw: true });
+    console.log(user2.id);
     await Review.bulkCreate([
       {
       userId: user2.id,
@@ -65,6 +61,7 @@ module.exports = {
 
     // WhiteReaper Reviews
     const user3 = await User.findOne({ where: { username: Users[2].username }, raw: true });
+    console.log(user3.id);
     await Review.bulkCreate([
       {
       userId: user3.id,
@@ -94,6 +91,7 @@ module.exports = {
 
     // sakura98 Reviews
     const user4 = await User.findOne({ where: { username: Users[3].username }, raw: true });
+    console.log(user4.id);
     await Review.create({
       userId: user4.id,
       spotId: spot3.id,
