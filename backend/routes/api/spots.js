@@ -71,7 +71,7 @@ router.get('/current', requireAuth, async(req, res) => {
                 attributes: [],
             }
         ],
-        group: ['Spot.id']
+        group: ['Spot.id', 'SpotImages.url']
     });
 
     if (userSpots.length >= 1) {
