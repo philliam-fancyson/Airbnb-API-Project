@@ -67,7 +67,8 @@ router.get('/current', requireAuth, async(req, res) => {
                 model: Review,
                 attributes: [],
             }
-        ]
+        ],
+        group: ['Spot.id', 'SpotImages.url']
     });
 
     if (userSpots.length >= 1) {
@@ -108,6 +109,7 @@ router.get('/:spotId', async(req, res) => {
                 attributes: ['id', 'firstName', 'lastName'],
             }
         ],
+        group: ['Spot.id', 'SpotImages.url']
     });
     if (spot) {
         res.json(spot);
