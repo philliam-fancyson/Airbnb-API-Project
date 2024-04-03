@@ -14,7 +14,7 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     const allSpots = await Spot.findAll()
 
-    for (let spot of allSpots) {
+    for (let spot of allSpots) { // This gives us the images. Do the same for aggregate data reviews
         const previewImage = await SpotImage.findOne({
             where: {
                 spotId: spot.id,
@@ -45,7 +45,7 @@ router.get('/current', requireAuth, async(req, res) => {
     });
 
     for (let spot of userSpots) {
-        const previewImage = await SpotImage.findOne({
+        const previewImage = await SpotImage.findOne({ // This gives us the images. Do the same for aggregate data reviews
             where: {
                 spotId: spot.id,
                 preview: true,
