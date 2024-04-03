@@ -33,7 +33,6 @@ module.exports = {
 
     // Demoman Reviews
     const user1 = await User.findOne({ where: { username: Users[0].username }, raw: true });
-    console.log(user1.id);
     await Review.create({
       userId: user1.id,
       spotId: spot1.id,
@@ -43,7 +42,6 @@ module.exports = {
 
     // funny-userGuy Reviews
     const user2 = await User.findOne({ where: { username: Users[1].username }, raw: true });
-    console.log(user2.id);
     await Review.bulkCreate([
       {
       userId: user2.id,
@@ -61,7 +59,9 @@ module.exports = {
 
     // WhiteReaper Reviews
     const user3 = await User.findOne({ where: { username: Users[2].username }, raw: true });
-    console.log(user3.id);
+    console.log("Here is where Error might be");
+    console.log(user3);
+    console.log("Error not here I guess?")
     await Review.bulkCreate([
       {
       userId: user3.id,
@@ -91,7 +91,6 @@ module.exports = {
 
     // sakura98 Reviews
     const user4 = await User.findOne({ where: { username: Users[3].username }, raw: true });
-    console.log(user4.id);
     await Review.create({
       userId: user4.id,
       spotId: spot3.id,
