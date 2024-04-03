@@ -31,8 +31,14 @@ module.exports = {
     const spot3 = await Spot.findOne({ raw: true, where: { name: Spots[2].name} })
     const spot4 = await Spot.findOne({ raw: true, where: { name: Spots[3].name} })
 
+    console.log(spot1)
+    console.log(spot2)
+    console.log(spot3)
+    console.log(spot4)
+
     // Demoman Reviews
     const user1 = await User.findOne({ where: { username: Users[0].username }, raw: true });
+    console.log(user1);
     await Review.create({
       userId: user1.id,
       spotId: spot1.id,
