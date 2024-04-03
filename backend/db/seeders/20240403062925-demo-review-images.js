@@ -27,13 +27,10 @@ module.exports = {
         }
       });
       for (let review of reviews) {
-        console.log('-------------------------')
-        console.log(review);
         await ReviewImage.create({
           reviewId: review.id,
           url: 'image url'
         });
-        console.log('-------------------------')
       };
     };
   },

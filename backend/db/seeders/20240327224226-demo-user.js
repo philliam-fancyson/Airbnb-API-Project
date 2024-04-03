@@ -27,7 +27,7 @@ module.exports = {
       {
         email: 'user2@user.io',
         username: 'WhiteReaper',
-        hashedPassword: bcrypt.hashSync('wR3=>d2=>wS3=>ggEZ'),
+        hashedPassword: bcrypt.hashSync('wR2=>d2=>wS3=>ggEZ'),
         firstName: 'Sergei',
         lastName: 'Dragunov',
       },
@@ -62,7 +62,7 @@ module.exports = {
       username: { [Op.in]: [
         'Demoman',
         'funny-userGuy',
-        'morbius',
+        'WhiteReaper',
         'Star-Platinum',
         'laundry-and-taxes',
         'sakura98'
