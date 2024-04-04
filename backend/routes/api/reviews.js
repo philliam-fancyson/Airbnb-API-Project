@@ -9,7 +9,7 @@ const { User, Spot, ReviewImage, Review } = require('../../db/models');
 
 const router = express.Router();
 
-// ! Maybe move this and other handlers into another route
+// TODO Maybe move this and other handlers into another route
 const validateReview = [
     check('review')
         .exists({ checkFalsy: true })
@@ -21,12 +21,11 @@ const validateReview = [
         handleValidationErrors
 ];
 
-// Current User's review
+// * Current User's review
 router.get('/current', requireAuth, async(req, res) => {
     const { user } = req;
 
     const userReviews = await Review.findAll({
-        logging: console.log,
         where: {
             userId: user.id
         },
@@ -43,14 +42,14 @@ router.get('/current', requireAuth, async(req, res) => {
                     exclude: ['createdAt', 'updatedAt']
                 },
             },
-            {
-                model: ReviewImage,
-                required: false
-            }
+            // {
+            //     model: ReviewImage,
+            //     required: false
+            // }
         ]
     })
 
-    // ! Bug Fixing model: Review what the fuck
+    // TODO Bug Fixing model: Review what the fuck
     // const userReviews = await Review.findAll({
     //     where: {
     //         userId: user.id
@@ -73,6 +72,7 @@ router.get('/current', requireAuth, async(req, res) => {
     };
 });
 
+// * Get review for :spotId
 router.get('/:spotId', requireAuth, async(req, res) => {
     const { user } = req;
 
@@ -80,7 +80,7 @@ router.get('/:spotId', requireAuth, async(req, res) => {
         where: {
             userId: user.id
         },
-        // ! Fix id not showing
+        // TODO Fix id not showing
         // attributes: { include: ['id'] },
         include: [
             {
@@ -93,7 +93,7 @@ router.get('/:spotId', requireAuth, async(req, res) => {
                     exclude: ['createdAt', 'updatedAt']
                 },
             },
-            // ! Include ReviewImage when fixed
+            // TODO Include ReviewImage when fixed
         ]
     });
 
@@ -108,6 +108,7 @@ router.get('/:spotId', requireAuth, async(req, res) => {
     };
 });
 
+// * Create Review Images
 router.post('/:reviewId/images', requireAuth, async(req, res, next) => {
     const { user } = req;
     const { url } = req.body;
@@ -161,6 +162,7 @@ router.post('/:reviewId/images', requireAuth, async(req, res, next) => {
     })
 });
 
+// * Edit Review
 router.put('/:reviewId', [requireAuth, validateReview], async(req, res, next) => {
     const { user } = req;
     const { review, stars } = req.body;
@@ -194,6 +196,7 @@ router.put('/:reviewId', [requireAuth, validateReview], async(req, res, next) =>
     res.json(userReview)
 });
 
+// * Delete Review
 router.delete('/:reviewId', requireAuth, async(req, res, next) => {
     const { user } = req;
 

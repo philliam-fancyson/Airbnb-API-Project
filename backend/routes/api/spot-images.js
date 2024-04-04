@@ -15,7 +15,7 @@ router.delete('/:imageId', requireAuth, async(req, res, next) => {
     });
     // Check if Spot's Image exists
     if (!spotImage) {
-        const err = new Error(`Spot Image couldn't be found`);
+        const err = new Error(`Couldn't find a Spot Image with the specified id`);
         err.title = "Resource Not Found";
         err.errors = { message: `Spot Image couldn't be found`};
         err.status = 404;
