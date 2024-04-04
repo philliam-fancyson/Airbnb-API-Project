@@ -1,5 +1,4 @@
 const express = require('express')
-const bcrypt = require('bcryptjs');
 const Sequelize = require('sequelize')
 
 const { check } = require('express-validator');
