@@ -10,6 +10,37 @@ const { User, Spot, SpotImage, Review } = require('../../db/models');
 
 const router = express.Router();
 
+const validateSpot = [
+    check('address')
+        .exists({ checkFalsy: true })
+        .withMessage('Street address is required'),
+    check('city')
+        .exists({ checkFalsy: true })
+        .withMessage('City is required'),
+    check('state')
+        .exists({ checkFalsy: true })
+        .withMessage('State is required'),
+    check('country')
+        .exists({ checkFalsy: true })
+        .withMessage('Country is required'),
+    check('lat')
+        .isFloat({ min: -90, max: 90})
+        .withMessage('Latitude must be within -90 and 90'),
+    check('lng')
+        .isFloat({ min: -180, max: 180})
+        .withMessage('Longitude must be within -180 and 180'),
+    check('name')
+        .isLength({ min: 1, max: 50})
+        .withMessage('Name must be less than 50 characters'),
+    check('description')
+        .exists({ checkFalsy: true })
+        .withMessage('Description is required'),
+    check('price')
+        .isFloat({ min: 0, max: Infinity})
+        .withMessage('Price per day must be a positive number'),
+    handleValidationErrors
+];
+
 // All Spots
 router.get('/', async (req, res) => {
     const allSpots = await Spot.findAll({
@@ -123,7 +154,7 @@ router.get('/:spotId', async(req, res) => {
 });
 
 // Create a new Spot
-router.post('/', requireAuth, async(req, res, next) => {
+router.post('/', [requireAuth, validateSpot], async(req, res, next) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
 
     const newSpot = await Spot.build({
@@ -185,7 +216,7 @@ router.post('/:spotId/images', requireAuth, async(req, res, next) => {
 })
 
 // Edit a Spot
-router.put('/:spotId', requireAuth, async(req, res, next) => {
+router.put('/:spotId', [requireAuth, validateSpot], async(req, res, next) => {
     const { user } = req;
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
 
