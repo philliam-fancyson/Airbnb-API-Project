@@ -29,8 +29,7 @@ router.get('/current', requireAuth, async(req, res) => {
         where: {
             userId: user.id
         },
-        // ! Fix id not showing
-        // attributes: { include: ['id'] },
+        attributes: { include: ['id'] },
         include: [
             {
                 model: User,
@@ -42,24 +41,16 @@ router.get('/current', requireAuth, async(req, res) => {
                     exclude: ['createdAt', 'updatedAt']
                 },
             },
-            // {
-            //     model: ReviewImage,
-            //     required: false
-            // }
         ]
-    })
+    });
 
-    // TODO Bug Fixing model: Review what the fuck
-    // const userReviews = await Review.findAll({
-    //     where: {
-    //         userId: user.id
-    //     },
-    //     include: {
-    //         model: ReviewImage,
-    //         required: false
-    //     }
-    // })
-    // console.log(userReviews)
+    for (let review of userReviews) {
+        const images = await ReviewImage.findAll({
+            where: {reviewId: review.dataValues.id},
+            attributes: ['id', 'url']
+        });
+        review.dataValues.ReviewImages = images
+    }
 
     if (userReviews.length >= 1) {
         res.json({
@@ -73,40 +64,46 @@ router.get('/current', requireAuth, async(req, res) => {
 });
 
 // * Get review for :spotId
-router.get('/:spotId', requireAuth, async(req, res) => {
-    const { user } = req;
+// router.get('/:spotId', requireAuth, async(req, res) => {
+//     const { user } = req;
 
-    const userReviews = await Review.findAll({
-        where: {
-            userId: user.id
-        },
-        // TODO Fix id not showing
-        // attributes: { include: ['id'] },
-        include: [
-            {
-                model: User,
-                attributes: ['id', 'firstName', 'lastName']
-            },
-            {
-                model: Spot,
-                attributes: {
-                    exclude: ['createdAt', 'updatedAt']
-                },
-            },
-            // TODO Include ReviewImage when fixed
-        ]
-    });
+//     const userReviews = await Review.findAll({
+//         where: {
+//             userId: user.id
+//         },
+//         attributes: { include: ['id'] },
+//         include: [
+//             {
+//                 model: User,
+//                 attributes: ['id', 'firstName', 'lastName']
+//             },
+//             {
+//                 model: Spot,
+//                 attributes: {
+//                     exclude: ['createdAt', 'updatedAt']
+//                 },
+//             },
+//         ]
+//     });
 
-    if (userReviews.length >= 1) {
-        res.json({
-            Review: userReviews
-        })
-    } else {
-        res.json({
-            message: 'No Reviews to show'
-        });
-    };
-});
+//     for (let review of userReviews) {
+//         const images = await ReviewImage.findAll({
+//             where: {reviewId: review.dataValues.id},
+//             attributes: ['id', 'url']
+//         });
+//         review.dataValues.ReviewImages = images
+//     };
+
+//     if (userReviews.length >= 1) {
+//         res.json({
+//             Review: userReviews
+//         })
+//     } else {
+//         res.json({
+//             message: 'No Reviews to show'
+//         });
+//     };
+// });
 
 // * Create Review Images
 router.post('/:reviewId/images', requireAuth, async(req, res, next) => {
