@@ -7,7 +7,6 @@ const { User, Review, ReviewImage } = require('../../db/models');
 const router = express.Router();
 
 // Delete image from Review
-// ! TypeError: Cannot read properties of undefined (reading 'field')
 router.delete('/:imageId', requireAuth, async(req, res, next) => {
     const { user } = req;
 

@@ -68,8 +68,9 @@ router.post('/:reviewId/images', requireAuth, async(req, res, next) => {
     const { user } = req;
     const { url } = req.body;
 
-    const review = await Review.findByPk(req.params.reviewId, {
-        attributes: { include: ['id'] }
+    const review = await Review.findOne({
+        where: {id : req.params.reviewId},
+        attributes: { include: ['id']}
     });
     // Check if review exists
     if (!review) {
@@ -90,6 +91,7 @@ router.post('/:reviewId/images', requireAuth, async(req, res, next) => {
     };
 
     // Checks if review has more than 10 images
+    console.log(review);
     const allReviewImages = await ReviewImage.findAll({
         where: {
             reviewId: review.id
@@ -122,10 +124,9 @@ router.put('/:reviewId', [requireAuth, validateReview], async(req, res, next) =>
     const { user } = req;
     const { review, stars } = req.body;
 
-    const userReview = await Review.findByPk(req.params.reviewId, {
-        attributes: { include: ['id'] }
-    });
+    const userReview = await Review.findOne({where: {id : req.params.reviewId}})
     // Check if review exists
+    console.log(userReview);
     if (!userReview) {
         const err = new Error(`Couldn't find a Review with the specified id`);
         err.title = "Resource Not Found";
@@ -155,7 +156,7 @@ router.put('/:reviewId', [requireAuth, validateReview], async(req, res, next) =>
 router.delete('/:reviewId', requireAuth, async(req, res, next) => {
     const { user } = req;
 
-    const userReview = await Review.findByPk(req.params.reviewId);
+    const userReview = await Review.findOne({where: {id: req.params.reviewId}});
     // Check if review exists
     if (!userReview) {
         const err = new Error(`Couldn't find a Review with the specified id`);
