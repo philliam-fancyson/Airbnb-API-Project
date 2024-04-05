@@ -11,14 +11,16 @@ const Spots = [
   { name: '2Fort' },
   { name: 'Speedwagon Foundation' },
   { name: 'Urban Square Towers' },
-  { name: 'Laundromat' }
+  { name: 'Laundromat' },
+  { name: 'App Academy' }
 ];
 
 const Users = [
   { username: 'Demoman' },
   { username: 'funny-userGuy' },
   { username: 'WhiteReaper' },
-  { username: 'sakura98' }
+  { username: 'sakura98' },
+  { username: 'JohnSmith' }
 ];
 
 /** @type {import('sequelize-cli').Migration} */
@@ -29,6 +31,16 @@ module.exports = {
     const spot2 = await Spot.findOne({ raw: true, where: { name: Spots[1].name} })
     const spot3 = await Spot.findOne({ raw: true, where: { name: Spots[2].name} })
     const spot4 = await Spot.findOne({ raw: true, where: { name: Spots[3].name} })
+    const spot5 = await Spot.findOne({ raw: true, where: { name: Spots[4].name} })
+
+    // JohnSmith bookings
+    const user5 = await User.findOne({ where: { username: Users[4].username }, raw: true });
+    await Booking.create({
+      userId: user5.id,
+      spotId: spot5.id,
+      startDate: "2021-11-19",
+      endDate: "2021-11-20"
+    });
 
     // Demoman bookings
     const user1 = await User.findOne({ where: { username: Users[0].username }, raw: true });

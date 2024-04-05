@@ -12,14 +12,16 @@ const Users = [
   { username: 'Demoman' },
   { username: 'funny-userGuy' },
   { username: 'WhiteReaper' },
-  { username: 'sakura98' }
+  { username: 'sakura98' },
+  { username: 'JohnSmith'}
 ];
 
 const Spots = [
   { name: '2Fort' },
   { name: 'Speedwagon Foundation' },
   { name: 'Urban Square Towers' },
-  { name: 'Laundromat' }
+  { name: 'Laundromat' },
+  { name: 'App Academy'}
 ];
 
 /** @type {import('sequelize-cli').Migration} */
@@ -30,13 +32,23 @@ module.exports = {
     const spot2 = await Spot.findOne({ raw: true, where: { name: Spots[1].name} })
     const spot3 = await Spot.findOne({ raw: true, where: { name: Spots[2].name} })
     const spot4 = await Spot.findOne({ raw: true, where: { name: Spots[3].name} })
+    const spot5 = await Spot.findOne({ raw: true, where: { name: Spots[4].name} })
+
+    // JohnSmith Reviews
+    const user5 = await User.findOne({ where: { username: Users[4].username }, raw: true });
+    await Review.create({
+      userId: user5.id,
+      spotId: spot5.id,
+      review: 'This was an awesome Spot!',
+      stars: 5,
+    })
 
     // Demoman Reviews
     const user1 = await User.findOne({ where: { username: Users[0].username }, raw: true });
     await Review.create({
       userId: user1.id,
       spotId: spot1.id,
-      review: 'This was an awesome Spot!',
+      review: 'What an amazing spot!!',
       stars: 5,
     })
 

@@ -11,6 +11,7 @@ const Users = [
   { username: 'Demoman' },
   { username: 'Star-Platinum' },
   { username: 'laundry-and-taxes' },
+  { username: 'JohnSmith'}
 ];
 
 /** @type {import('sequelize-cli').Migration} */
@@ -28,9 +29,25 @@ module.exports = {
       where: { username: Users[2].username },
       raw: true
     });
+    const user4 = await User.findOne({
+      where: { username: Users[3].username },
+      raw: true
+    });
 
 
     await Spot.bulkCreate([
+      {
+        ownerId: user4.id,
+        address: "123 Disney Lane",
+        city: "San Francisco",
+        state: "California",
+        country: "United States of America",
+        lat: 37.7645358,
+        lng: -122.4730327,
+        name: "App Academy",
+        description: "Place where web developers are created",
+        price: 123,
+      },
       {
         ownerId: user1.id,
         address: '123 TF2',
@@ -87,7 +104,7 @@ module.exports = {
     options.tableName = 'Spots';
     const Op  = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      name : { [Op.in]: ['2Fort', 'Speedwagon Foundation', 'Urban Square Towers', 'Laundromat'] }
+      name : { [Op.in]: ['App Academy','2Fort', 'Speedwagon Foundation', 'Urban Square Towers', 'Laundromat'] }
     }, {})
   }
 };

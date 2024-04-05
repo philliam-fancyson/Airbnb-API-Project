@@ -9,6 +9,7 @@ if (process.env.NODE_ENV === 'production') {
 };
 
 const Spots = [
+  { name: 'App Academy'},
   { name: '2Fort' },
   { name: 'Speedwagon Foundation' },
   { name: 'Urban Square Towers' },
