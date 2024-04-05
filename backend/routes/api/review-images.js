@@ -11,21 +11,19 @@ const router = express.Router();
 router.delete('/:imageId', requireAuth, async(req, res, next) => {
     const { user } = req;
 
-    const reviewImage = await ReviewImage.findByPk(req.params.imageId,{
-        include: { model: Review }
-    });
+    const reviewImage = await ReviewImage.findByPk(req.params.imageId);
     // Check if Review's Image exists
     if (!reviewImage) {
-        const err = new Error(`Review must belong to the current user`);
+        const err = new Error(`Couldn't find a Review Image with the specified id`);
         err.title = "Resource Not Found";
         err.errors = { message: `Review Image couldn't be found`};
         err.status = 404;
         return next(err);
-
-    }
+    };
     // Checks if user owns the Review
-    if (user.id !== reviewImage.Review.userId) {
-        const err = new Error("Spot must belong to the current user.");
+    const review = await Review.findOne({where: { id: reviewImage.dataValues.reviewId }});
+    if (user.id !== review.userId) {
+        const err = new Error("Review must belong to the current user.");
         err.title = "Forbidden";
         err.errors = { message: "Forbidden" };
         err.status = 403;
