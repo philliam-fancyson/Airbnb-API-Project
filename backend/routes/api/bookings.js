@@ -121,11 +121,27 @@ router.put('/:bookingId', [requireAuth, validateDates], async(req, res, next) =>
             spotId: booking.spotId,
             [Op.or]: [
                 { startDate: { [Op.between]: [reqStartDate, reqEndDate] }},
-                { endDate: { [Op.between]: [reqStartDate, reqEndDate] }} ,
-            ]
+                { endDate: { [Op.between]: [reqStartDate, reqEndDate] }},
+            ],
+            id: { [Op.ne]: req.params.bookingId}
         }
     });
-    if (spotBookings.length >= 1) return handleBookingOverlapErrors(reqStartDate, reqEndDate, spotBookings, next)
+
+    let spotBookings2 = await Booking.findAll({
+        where: {
+            spotId: booking.spotId,
+            [Op.and]: [
+                { startDate: { [Op.lt]: reqStartDate }}, { endDate: { [Op.gt]: reqStartDate}},
+                { startDate: { [Op.lt]: reqEndDate }}, { endDate: { [Op.gt]: reqEndDate}},
+            ],
+            id: { [Op.ne]: req.params.bookingId}
+        }
+    });
+
+    console.log(spotBookings2);
+
+    if (spotBookings.length >= 1) return handleBookingOverlapErrors(reqStartDate, reqEndDate, spotBookings, next);
+    else if (spotBookings2.length >= 1) return handleBookingOverlapErrors(reqStartDate, reqEndDate, spotBookings2, next);
     else {
         booking.startDate = reqStartDate;
         booking.endDate = reqEndDate;

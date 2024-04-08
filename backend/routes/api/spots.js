@@ -94,7 +94,7 @@ const handleBookingOverlapErrors = (reqStartDate, reqEndDate, booking, next) => 
             (books.endDate >= reqStartDate && books.endDate <= reqEndDate)) {
                 err.errors = { startDate: startDateError, endDate: endDateError};
                 return next(err);
-            }
+        };
     };
 };
 
@@ -182,7 +182,7 @@ router.get('/', handleQueries, async (req, res) => {
                 preview: true
             }
         });
-        const previewImage = spotPreviewImage ? spotPreviewImage.url : [];
+        const previewImage = spotPreviewImage ? spotPreviewImage.url : null;
         spot.dataValues.previewImage = previewImage
 
     }
@@ -263,6 +263,9 @@ router.get('/:spotId', async(req, res) => {
         group: ['Spot.id', 'SpotImages.id', 'Owner.id']
     });
     if (spot) {
+        if (spot.dataValues.SpotImages.length === 0) {
+            spot.dataValues.SpotImages = null;
+        };
         res.json(spot);
     } else {
         // TODO  Throw to error handler
@@ -275,7 +278,7 @@ router.get('/:spotId', async(req, res) => {
 });
 
 // * All :spotId's Reviews
-router.get('/:spotId/reviews', async(req, res) => {
+router.get('/:spotId/reviews', async(req, res, next) => {
 
     const spot = await Spot.findByPk(req.params.spotId);
     // Check if spot exists
@@ -470,17 +473,7 @@ router.post('/:spotId/reviews', [requireAuth, validateReview], async(req, res, n
         review,
         stars,
     });
-    // TODO For some reason not returning id of review, look into review
-    // TODO because creating a spot returns id
-    const payload = {
-        id: newReview.id,
-        userId: newReview.userId,
-        spotId: newReview.spotId,
-        review: newReview.review,
-        stars: newReview.stars
-    };
 
-    console.log(payload);
     res.statusCode = 201;
     res.setHeader('Content-Type', 'application/json')
     res.json(newReview);
@@ -527,7 +520,19 @@ router.post('/:spotId/bookings', [requireAuth, validateDates], async(req, res, n
             ]
         }
     });
+
+    let booking2 = await Booking.findAll({
+        where: {
+            spotId: spot.id,
+            [Op.and]: [
+                { startDate: { [Op.lte]: reqStartDate }}, { endDate: { [Op.gte]: reqStartDate}},
+                [{ startDate: { [Op.lte]: reqEndDate }}, { endDate: { [Op.gte]: reqEndDate}}]
+            ]
+        }
+    });
+
     if (booking.length >= 1) return handleBookingOverlapErrors(reqStartDate, reqEndDate, booking, next)
+    else if (booking2.length >= 1) return handleBookingOverlapErrors(reqStartDate, reqEndDate, booking2, next)
     else {
         booking = await Booking.create({
             spotId: spot.id,
