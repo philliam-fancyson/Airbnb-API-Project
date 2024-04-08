@@ -13,7 +13,10 @@ const Users = [
   { username: 'funny-userGuy' },
   { username: 'WhiteReaper' },
   { username: 'sakura98' },
-  { username: 'JohnSmith'}
+  { username: 'JohnSmith'},
+  { username: 'Chopper'},
+  { username: 'Berrylover'},
+  { username: 'HanaHanaNoMi'}
 ];
 
 const Spots = [
@@ -21,7 +24,9 @@ const Spots = [
   { name: 'Speedwagon Foundation' },
   { name: 'Urban Square Towers' },
   { name: 'Laundromat' },
-  { name: 'App Academy'}
+  { name: 'App Academy'},
+  { name: 'Going Merry' },
+  { name: 'Thousand Sunny' }
 ];
 
 /** @type {import('sequelize-cli').Migration} */
@@ -33,6 +38,8 @@ module.exports = {
     const spot3 = await Spot.findOne({ raw: true, where: { name: Spots[2].name} })
     const spot4 = await Spot.findOne({ raw: true, where: { name: Spots[3].name} })
     const spot5 = await Spot.findOne({ raw: true, where: { name: Spots[4].name} })
+    const spot6 = await Spot.findOne({ raw: true, where: { name: Spots[5].name} })
+    const spot7 = await Spot.findOne({ raw: true, where: { name: Spots[6].name} })
 
     // JohnSmith Reviews
     const user5 = await User.findOne({ where: { username: Users[4].username }, raw: true });
@@ -41,7 +48,56 @@ module.exports = {
       spotId: spot5.id,
       review: 'This was an awesome Spot!',
       stars: 5,
-    })
+    });
+
+    // Straw Hat Reviews
+    const user6 = await User.findOne({ where: { username: Users[4].username }, raw: true });
+    await Review.bulkCreate([
+      {
+        userId: user6.id,
+        spotId: spot6.id,
+        review: 'Amazing Place!',
+        stars: 5,
+      },
+      {
+        userId: user6.id,
+        spotId: spot7.id,
+        review: 'Awesome Time!',
+        stars: 5,
+        },
+    ]);
+
+    const user7 = await User.findOne({ where: { username: Users[4].username }, raw: true });
+    await Review.bulkCreate([
+      {
+        userId: user7.id,
+        spotId: spot6.id,
+        review: 'Magnificent Place!',
+        stars: 5,
+      },
+      {
+        userId: user7.id,
+        spotId: spot7.id,
+        review: 'Great Time!',
+        stars: 5,
+        },
+    ]);
+
+    const user8 = await User.findOne({ where: { username: Users[4].username }, raw: true });
+    await Review.bulkCreate([
+      {
+      userId: user8.id,
+      spotId: spot6.id,
+      review: 'Wonderful experience',
+      stars: 5,
+      },
+      {
+        userId: user8.id,
+        spotId: spot7.id,
+        review: 'Excellent location',
+        stars: 5,
+        },
+    ]);
 
     // Demoman Reviews
     const user1 = await User.findOne({ where: { username: Users[0].username }, raw: true });

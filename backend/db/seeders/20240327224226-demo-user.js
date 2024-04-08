@@ -20,6 +20,13 @@ module.exports = {
         username: "JohnSmith"
       },
       {
+        email: "jane.smith@gmail.com",
+        firstName: "Jane",
+        lastName: "Smith",
+        hashedPassword: bcrypt.hashSync('secret password'),
+        username: "JaneSmith"
+      },
+      {
         email: 'demo@user.io',
         username: 'Demoman',
         hashedPassword: bcrypt.hashSync('kaboom'),
@@ -60,7 +67,56 @@ module.exports = {
         hashedPassword: bcrypt.hashSync('AKB48!HKT48'),
         firstName: 'Sakura',
         lastName: 'Miyawaki'
-      }
+      },
+      {
+        email: 'StrawHat@user.io',
+        username: 'StrawHatLuffy',
+        hashedPassword: bcrypt.hashSync('TheOnePieceIsReal!'),
+        firstName: 'Monkey D.',
+        lastName: 'Luffy'
+      },
+      {
+        email: 'PirateHunter@user.io',
+        username: 'WadoIchimonji',
+        hashedPassword: bcrypt.hashSync('WhichwayisEast'),
+        firstName: 'Roronoa',
+        lastName: 'Zoro'
+      },
+      {
+        email: 'GreatCaptainUsopp@user.io',
+        username: 'UsoppHammer',
+        hashedPassword: bcrypt.hashSync('IMTHEGREATESTPIRATEEVER123'),
+        firstName: 'God',
+        lastName: 'Usopp'
+      },
+      {
+        email: 'Dr.Chopper.user.io',
+        username: 'Chopper',
+        hashedPassword: bcrypt.hashSync('DoctorsCode'),
+        firstName: 'Tony Tony',
+        lastName: 'Chopper'
+      },
+      {
+        email: 'Navigator@user.io',
+        username: 'Berrylover',
+        hashedPassword: bcrypt.hashSync('I1Love2Berries3!'),
+        firstName: 'Nami',
+        lastName: 'StrawHat'
+      },
+      {
+        email: 'TresFleur@user.io',
+        username: 'HanaHanaNoMi',
+        hashedPassword: bcrypt.hashSync('Cinco@Fleur55'),
+        firstName: 'Nico',
+        lastName: 'Robin'
+      },
+      {
+        email: 'WizardHowl@user.io',
+        username: 'Howl04',
+        hashedPassword: bcrypt.hashSync('SophieMyLove21'),
+        firstName: 'Howl',
+        lastName: 'Calcifer'
+      },
     ])
   },
 
@@ -75,7 +131,15 @@ module.exports = {
         'Star-Platinum',
         'laundry-and-taxes',
         'sakura98',
-        'JohnSmith'
+        'JohnSmith',
+        'StrawHatLuffy',
+        'WadoIchimonji',
+        'UsoppHammer',
+        'Chopper',
+        'Berrylover',
+        'HanaHanaNoMi',
+        'JaneSmith',
+        'Howl04',
       ]}
     }, {})
   }

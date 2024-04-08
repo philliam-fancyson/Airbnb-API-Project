@@ -12,7 +12,9 @@ const Spots = [
   { name: 'Speedwagon Foundation' },
   { name: 'Urban Square Towers' },
   { name: 'Laundromat' },
-  { name: 'App Academy' }
+  { name: 'App Academy' },
+  { name: 'Going Merry' },
+  { name: 'Thousand Sunny' }
 ];
 
 const Users = [
@@ -20,7 +22,10 @@ const Users = [
   { username: 'funny-userGuy' },
   { username: 'WhiteReaper' },
   { username: 'sakura98' },
-  { username: 'JohnSmith' }
+  { username: 'JohnSmith' },
+  { username: 'Chopper'},
+  { username: 'Berrylover'},
+  { username: 'HanaHanaNoMi'}
 ];
 
 /** @type {import('sequelize-cli').Migration} */
@@ -32,6 +37,8 @@ module.exports = {
     const spot3 = await Spot.findOne({ raw: true, where: { name: Spots[2].name} })
     const spot4 = await Spot.findOne({ raw: true, where: { name: Spots[3].name} })
     const spot5 = await Spot.findOne({ raw: true, where: { name: Spots[4].name} })
+    const spot6 = await Spot.findOne({ raw: true, where: { name: Spots[5].name} })
+    const spot7 = await Spot.findOne({ raw: true, where: { name: Spots[6].name} })
 
     // JohnSmith bookings
     const user5 = await User.findOne({ where: { username: Users[4].username }, raw: true });
@@ -41,6 +48,55 @@ module.exports = {
       startDate: "2021-11-19",
       endDate: "2021-11-20"
     });
+
+    // StrawHat Bookings
+    const user6 = await User.findOne({ where: { username: Users[4].username }, raw: true });
+    await Booking.bulkCreate([
+      {
+        userId: user6.id,
+        spotId: spot6.id,
+        startDate: "2024-01-19",
+        endDate: "2024-01-21"
+      },
+      {
+        userId: user6.id,
+        spotId: spot7.id,
+        startDate: "2024-01-21",
+        endDate: "2024-02-04"
+      },
+  ]);
+
+    const user7 = await User.findOne({ where: { username: Users[4].username }, raw: true });
+    await Booking.bulkCreate([
+      {
+        userId: user7.id,
+        spotId: spot6.id,
+        startDate: "2024-02-19",
+        endDate: "2024-02-21"
+      },
+      {
+        userId: user7.id,
+        spotId: spot7.id,
+        startDate: "2024-02-21",
+        endDate: "2024-03-04"
+      },
+  ]);
+
+    const user8 = await User.findOne({ where: { username: Users[4].username }, raw: true });
+    await Booking.bulkCreate([
+      {
+        userId: user8.id,
+        spotId: spot6.id,
+        startDate: "2024-03-19",
+        endDate: "2024-03-21"
+      },
+      {
+        userId: user8.id,
+        spotId: spot7.id,
+        startDate: "2024-03-21",
+        endDate: "2024-04-04"
+      },
+  ]);
 
     // Demoman bookings
     const user1 = await User.findOne({ where: { username: Users[0].username }, raw: true });
