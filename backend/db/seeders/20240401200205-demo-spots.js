@@ -269,8 +269,8 @@ module.exports = {
       {
         ownerId: user7.id,
         address: "123 Peach Lane",
-        city: "Kamurocho",
-        state: "Kamurocho",
+        city: "Kyoto",
+        state: "Kyoto",
         country: "Japan",
         lat: -87.121212,
         lng: -167.12121,
@@ -281,8 +281,8 @@ module.exports = {
       {
         ownerId: user7.id,
         address: "123 Kiryu Lane",
-        city: "Sotenbori",
-        state: "Sotenbori",
+        city: "Kamurocho",
+        state: "Kamurocho",
         country: "Japan",
         lat: -77.121212,
         lng: -147.12121,
