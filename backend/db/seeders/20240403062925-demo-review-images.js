@@ -13,7 +13,9 @@ const Spots = [
   { name: '2Fort' },
   { name: 'Speedwagon Foundation' },
   { name: 'Urban Square Towers' },
-  { name: 'Laundromat' }
+  { name: 'Laundromat' },
+  { name: 'Going Merry' },
+  { name: 'Thousand Sunny' }
 ];
 
 /** @type {import('sequelize-cli').Migration} */
