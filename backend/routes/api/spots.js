@@ -464,7 +464,7 @@ router.post('/:spotId/reviews', [requireAuth, validateReview], async(req, res, n
     }
 
     // Build new Review
-    const newReview = await Review.build({
+    const newReview = await Review.create({
         userId: req.user.id,
         spotId: req.params.spotId,
         review,
@@ -472,7 +472,15 @@ router.post('/:spotId/reviews', [requireAuth, validateReview], async(req, res, n
     });
     // TODO For some reason not returning id of review, look into review
     // TODO because creating a spot returns id
-    await newReview.save();
+    const payload = {
+        id: newReview.id,
+        userId: newReview.userId,
+        spotId: newReview.spotId,
+        review: newReview.review,
+        stars: newReview.stars
+    };
+
+    console.log(payload);
     res.statusCode = 201;
     res.setHeader('Content-Type', 'application/json')
     res.json(newReview);
