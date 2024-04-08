@@ -105,7 +105,7 @@ const handleQueries = [
         .withMessage("Page must be greater than or equal to 1"),
     check('size')
         .optional()
-        .isInt( {min: 1 })
+        .isInt( {min: 1, max: 20})
         .withMessage("Size must be greater than or equal to 1"),
     check('minLat')
         .optional()
@@ -183,12 +183,12 @@ router.get('/', handleQueries, async (req, res) => {
             }
         });
         const previewImage = spotPreviewImage ? spotPreviewImage.url : null;
-        spot.dataValues.previewImage = previewImage
-
+        spot.dataValues.previewImage = previewImage;
     }
 
     res.json({
-        Spots: allSpots
+        Spots: allSpots,
+        page, size
     });
 });
 
