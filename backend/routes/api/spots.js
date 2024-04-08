@@ -309,7 +309,7 @@ router.get('/:spotId/reviews', async(req, res, next) => {
                 where: { reviewId: review.id},
                 attributes: ['id', 'url']
             })
-            review.dataValues.ReviewImage = reviewImages;
+            review.dataValues.ReviewImage = reviewImages.length > 0 ? reviewImages : null;
         };
         res.json({
             Review: userReviews
