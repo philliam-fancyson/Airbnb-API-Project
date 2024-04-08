@@ -95,7 +95,7 @@ module.exports = {
         lat: 80.5125651,
         lng: -10.2214542,
         name: "The Moving Castle",
-        description: "Come take a load off",
+        description: "It's Been A Pleasure Meeting You, Even If You Are My Least Favorite Vegetable.",
         price: 350,
       },
       {
