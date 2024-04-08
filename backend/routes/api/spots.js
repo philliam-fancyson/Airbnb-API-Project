@@ -412,7 +412,7 @@ router.post('/:spotId/images', requireAuth, async(req, res, next) => {
 
     // Checks if user owns the spot
     if (user.id !== spot.ownerId) {
-        const err = new Error("Spot must belong to the current user.");
+        const err = new Error("Forbidden");
         err.title = "Forbidden";
         err.errors = { message: "Forbidden" };
         err.status = 403;
@@ -503,7 +503,7 @@ router.post('/:spotId/bookings', [requireAuth, validateDates], async(req, res, n
     // Check if user is owner of spot
     // TODO could be a function
     if (user.id === spot.ownerId) {
-        const err = new Error("Spot must NOT belong to the current user.");
+        const err = new Error("Forbidden.");
         err.title = "Forbidden";
         err.errors = { message: "Forbidden" };
         err.status = 403;
@@ -562,7 +562,7 @@ router.put('/:spotId', [requireAuth, validateSpot], async(req, res, next) => {
     }
     // Checks if user owns the spot
     if (user.id !== spot.ownerId) {
-        const err = new Error("Spot must belong to the current user.");
+        const err = new Error("Forbidden.");
         err.title = "Forbidden";
         err.errors = { message: "Forbidden" };
         err.status = 403;
@@ -600,7 +600,7 @@ router.delete('/:spotId', requireAuth, async(req, res, next) => {
     }
     // Checks if user owns the spot
     if (user.id !== spot.ownerId) {
-        const err = new Error("Spot must belong to the current user.");
+        const err = new Error("Forbidden");
         err.title = "Forbidden";
         err.errors = { message: "Forbidden" };
         err.status = 403;

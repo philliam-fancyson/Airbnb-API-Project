@@ -99,7 +99,7 @@ router.put('/:bookingId', [requireAuth, validateDates], async(req, res, next) =>
     // Checks if user owns the booking
     // TODO can be a function
     if (user.id !== booking.userId) {
-        const err = new Error("Booking must belong to the current user.");
+        const err = new Error("Forbidden");
         err.title = "Forbidden";
         err.errors = { message: "Forbidden" };
         err.status = 403;
@@ -108,7 +108,7 @@ router.put('/:bookingId', [requireAuth, validateDates], async(req, res, next) =>
 
     // Check if booking is in the past
     if (booking.endDate < Date.now()) {
-        const err = new Error("Can't edit a booking that's past the end date");
+        const err = new Error("Forbidden");
         err.title = "Forbidden";
         err.errors = { message: "Past bookings can't be modified" };
         err.status = 403;
@@ -168,7 +168,7 @@ router.delete('/:bookingId', requireAuth, async(req, res, next) => {
 
     // Checks if user owns the booking
     if (user.id !== booking.userId) {
-        const err = new Error("Booking must belong to the current user.");
+        const err = new Error("Forbidden");
         err.title = "Forbidden";
         err.errors = { message: "Forbidden" };
         err.status = 403;
@@ -178,7 +178,7 @@ router.delete('/:bookingId', requireAuth, async(req, res, next) => {
 
     // Check if booking is in the past or ongoing
     if (booking.startDate <= Date.now()) {
-        const err = new Error("Bookings that have been started can't be deleted");
+        const err = new Error("Forbidden");
         err.title = "Forbidden";
         err.errors = { message: "Bookings that have been started can't be deleted" };
         err.status = 403;

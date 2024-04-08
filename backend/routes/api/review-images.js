@@ -22,7 +22,7 @@ router.delete('/:imageId', requireAuth, async(req, res, next) => {
     // Checks if user owns the Review
     const review = await Review.findOne({where: { id: reviewImage.dataValues.reviewId }});
     if (user.id !== review.userId) {
-        const err = new Error("Review must belong to the current user.");
+        const err = new Error("Forbidden");
         err.title = "Forbidden";
         err.errors = { message: "Forbidden" };
         err.status = 403;
