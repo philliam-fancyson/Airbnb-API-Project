@@ -51,7 +51,7 @@ module.exports = {
     });
 
     // Straw Hat Reviews
-    const user6 = await User.findOne({ where: { username: Users[4].username }, raw: true });
+    const user6 = await User.findOne({ where: { username: Users[5].username }, raw: true });
     await Review.bulkCreate([
       {
         userId: user6.id,
@@ -67,7 +67,7 @@ module.exports = {
         },
     ]);
 
-    const user7 = await User.findOne({ where: { username: Users[4].username }, raw: true });
+    const user7 = await User.findOne({ where: { username: Users[6].username }, raw: true });
     await Review.bulkCreate([
       {
         userId: user7.id,
@@ -83,7 +83,7 @@ module.exports = {
         },
     ]);
 
-    const user8 = await User.findOne({ where: { username: Users[4].username }, raw: true });
+    const user8 = await User.findOne({ where: { username: Users[7].username }, raw: true });
     await Review.bulkCreate([
       {
       userId: user8.id,
