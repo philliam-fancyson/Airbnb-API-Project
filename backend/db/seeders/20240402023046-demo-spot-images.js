@@ -17,6 +17,20 @@ const Spots = [
   { name: 'Going Merry' },
   { name: 'Thousand Sunny' },
   { name: 'The Moving Castle'},
+  { name:"Apple Academy"},
+  { name:"Apple 2 Academy"},
+  { name:'Apple 3 Academy'},
+  { name:'Apple 4 Academy'},
+  { name:'App Vista'},
+  { name:'App Mansion'},
+  { name:'App Appademy'},
+  { name:'App Lodge'},
+  { name:'App Home'},
+  { name:'App Castle'},
+  { name:'App Towers'},
+  { name:'Millenium Towers'},
+  { name:'App Building'},
+  { name:'App Center'}
 ];
 
 
@@ -28,7 +42,7 @@ module.exports = {
         raw: true,
         attributes: ['id'],
         where: { name: Spots[i].name}
-      })
+      });
       await SpotImage.bulkCreate([
         {
           spotId: spot.id,
