@@ -542,7 +542,15 @@ router.post('/:spotId/bookings', [requireAuth, validateDates], async(req, res, n
         });
     };
 
-    res.json({booking});
+    console.log(booking)
+
+    res.json({
+        id: booking.dataValues.id,
+        spotId: booking.dataValues.spotId,
+        userId: booking.dataValues.userId,
+        startDate: booking.dataValues.startDate,
+        endDate: booking.dataValues.endDate
+    });
 });
 
 // * Edit a Spot
