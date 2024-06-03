@@ -7,6 +7,7 @@
     cursor: pointer;
 }
 
+/* This stretches across, change size of li or only apply to text */
 .dropdown-icon-small {
     cursor: pointer
 }
