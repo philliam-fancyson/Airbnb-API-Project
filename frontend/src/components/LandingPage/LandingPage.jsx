@@ -17,6 +17,7 @@ function LandingPage() {
         dispatch(getAllSpots())
     },[dispatch])
 
+    if (!allSpots.length) return null;
     return (
         <div className="landing-grid">
             {allSpots.map((spot) =>
