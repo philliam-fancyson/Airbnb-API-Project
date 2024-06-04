@@ -17,7 +17,11 @@ function LandingPage() {
         dispatch(getAllSpots())
     },[dispatch])
 
-    if (!allSpots.length) return null;
+    if (!allSpots.length) {
+        console.log("Debug")
+        return null
+    }
+
     return (
         <div className="landing-grid">
             {allSpots.map((spot) =>
@@ -33,7 +37,7 @@ function LandingPage() {
                     </Link>
                     <div className="in-line">
                         <h2 style={{"text-align": "left", "width": "49%"}}>{spot.city}, {spot.state}</h2>
-                        <p style={{"text-align": "right", "width": "49%"}}>{spot.avgRating ?<> <FaStar />{spot.avgRating.toFixed(1)} </>: <><FaStar /> New</>}</p>
+                        <p style={{"text-align": "right", "width": "49%"}}>{spot.avgRating ?<> <FaStar />{spot.avgRating} </>: <><FaStar /> New</>}</p>
                         <p>TEST TEST TEST</p>
                     </div>
                     <p>{`$${spot.price} night`}</p>
