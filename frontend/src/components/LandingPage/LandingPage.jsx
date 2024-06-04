@@ -27,7 +27,7 @@ function LandingPage() {
                     data-tooltip-content="Hello world!"
                     >
                         {/* <Tooltip id="my-tooltip"> */}
-                            <img src={spot.previewImage ? spot.previewImage : placeholder} />
+                            <img src={spot.previewImage ? spot.previewImage : "placeholder"} />
                         {/* </Tooltip> */}
                     </Link>
                     <div className="in-line">
