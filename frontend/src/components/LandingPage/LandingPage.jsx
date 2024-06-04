@@ -33,6 +33,7 @@ function LandingPage() {
                     <div className="in-line">
                         <h2 style={{"text-align": "left", "width": "49%"}}>{spot.city}, {spot.state}</h2>
                         <p style={{"text-align": "right", "width": "49%"}}>{spot.avgRating ?<> <FaStar />{spot.avgRating.toFixed(1)} </>: <><FaStar /> New</>}</p>
+                        <p>TEST TEST TEST</p>
                     </div>
                     <p>{`$${spot.price} night`}</p>
                 </div>
