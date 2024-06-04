@@ -40,11 +40,11 @@ function SpotDetails () {
             <div className="spot-callout-box">
                 <h3>${spot.price}</h3>
                 {/* <LuDot /> {spot.numReviews} {spot.numReviews === 1 ? "review" : "reviews"} */}
-                <p>{spot.avgStarRating ? <><FaStar /> {parseInt(spot.avgStarRating).toFixed(2)} </>: <><FaStar />{"New"}</>} {spot.numReviews !== 0 ? <><LuDot /> {(spot.numReviews === 1 ? spot.numReviews + " review" : spot.numReviews + " reviews")} </>: null} </p>
+                <p>{spot.avgStarRating ? <><FaStar /> {parseInt(spot.avgStarRating).toFixed(2)} </>: <><FaStar />{"New"}</>} {spot.numReviews !== 0 ? <><LuDot /> {(spot.numReviews === 1 ? spot.numReviews + " review" : spot.numReviews + " reviews")}</> : null} </p>
                 <button onClick={handleClick}>Reserve</button>
             </div>
             <div className="spot-reviews">
-                <h3>{spot.avgStarRating ? <><FaStar /> {parseInt(spot.avgStarRating).toFixed(2)} </>: <><FaStar />{"New"}</>} {spot.numReviews !== 0 ? <><LuDot /> {(spot.numReviews === 1 ? spot.numReviews + " review" : spot.numReviews + " reviews")} </>: null}</h3>
+                <h3>{spot.avgStarRating ? <><FaStar /> {parseInt(spot.avgStarRating).toFixed(2)} </>: <><FaStar />{"New"}</>} {spot.numReviews !== 0 ? <><LuDot /> {(spot.numReviews === 1 ? spot.numReviews + " review" : spot.numReviews + " reviews")}</> : null}</h3>
             </div>
         </div>
     )
