@@ -36,9 +36,8 @@ function LandingPage() {
                         {/* </Tooltip> */}
                     </Link>
                     <div className="in-line">
-                        <h2 style={{"text-align": "left", "width": "49%"}}>{spot.city}, {spot.state}</h2>
-                        <p style={{"text-align": "right", "width": "49%"}}>{spot.avgRating ?<> <FaStar />{(spot.avgRating ? spot.avgRating.toFixed(1) : null)} </>: <><FaStar /> New</>}</p>
-                        <p>TEST TEST TEST</p>
+                        <h2 style={{"textAlign": "left", "width": "49%"}}>{spot.city}, {spot.state}</h2>
+                        <p style={{"textAlign": "right", "width": "49%"}}>{spot.avgRating ?<> <FaStar />{parseInt(spot.avgRating) ? parseInt(spot.avgRating).toFixed(1) : null} </>: <><FaStar /> New</>}</p>
                     </div>
                     <p>{`$${spot.price} night`}</p>
                 </div>
