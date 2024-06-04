@@ -12,9 +12,8 @@ function SpotDetails () {
     // const allSpots = useSelector(state => state.spot.spots)
     // const spot = allSpots.find(spot => spot.id === parseInt(spotId))
     const spot = useSelector(state => state.spot.spot)
-    console.log(spot)
     const spotOwner = spot.Owner
-    console.log(spotOwner)
+    console.log(spotOwner);
 
     useEffect(() => {
         dispatch(getASpot(spotId))
@@ -26,6 +25,8 @@ function SpotDetails () {
 
     // TODO: CSS for image gallery
     // TODO: Spot Button
+    if (!spot) return null;
+
     return (
         <div>
             <h2>{spot.name}</h2>
