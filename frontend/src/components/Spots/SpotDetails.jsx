@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getASpot } from "../../store/spot";
+import { getAllReviews } from "../../store/review";
 import { useEffect } from "react";
 import { FaStar } from "react-icons/fa6";
 import './SpotDetails.css'
@@ -11,12 +12,22 @@ function SpotDetails () {
     const { spotId } = useParams();
     // const allSpots = useSelector(state => state.spot.spots)
     // const spot = allSpots.find(spot => spot.id === parseInt(spotId))
-    const spot = useSelector(state => state.spot.spot)
+    const spot = useSelector(state => state.spot.spot);
+    const reviews = useSelector(state => state.review.reviews)
     const spotOwner = spot.Owner
-    console.log(spotOwner);
+    // console.log(spotOwner);
+    // console.log(reviews);
+    // const test = new Date(reviews[0].createdAt);
+    const options = { month: 'long', year: 'numeric' };
+    // console.log(test.toLocaleDateString("en-us", options))
+
 
     useEffect(() => {
         dispatch(getASpot(spotId))
+    }, [dispatch, spotId])
+
+    useEffect(() => {
+        dispatch(getAllReviews(spotId))
     }, [dispatch, spotId])
 
     const handleClick = () => {
@@ -34,8 +45,7 @@ function SpotDetails () {
             <div className="spot-image-gallery">
                 <img src={spot.previewImage ? spot.previewImage : "placeholder"} />
             </div>
-            <h3>PLACEHOLDER FOR HOSTED</h3>
-            {/* <h3>Hosted by {spotOwner.firstName} {spotOwner.lastName}</h3> */}
+            <h3>Hosted by {spotOwner.firstName} {spotOwner.lastName}</h3>
             <p>{spot.description}. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             <div className="spot-callout-box">
                 <h3>${spot.price}</h3>
@@ -45,6 +55,13 @@ function SpotDetails () {
             </div>
             <div className="spot-reviews">
                 <h3>{spot.avgStarRating ? <><FaStar /> {parseInt(spot.avgStarRating).toFixed(2)} </>: <><FaStar />{"New"}</>} {spot.numReviews !== 0 ? <><LuDot /> {(spot.numReviews === 1 ? spot.numReviews + " review" : spot.numReviews + " reviews")}</> : null}</h3>
+                {reviews ? reviews.map(review => (
+                    <div className="review-box" key={review.id}>
+                        <h3>{review.User.firstName}</h3>
+                        <p>{new Date(review.createdAt).toLocaleDateString("en-us", options)}</p>
+                        <p>{review.review} Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </ div>
+                )) : "Be the first to review!"}
             </div>
         </div>
     )

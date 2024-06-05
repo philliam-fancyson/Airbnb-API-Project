@@ -1,0 +1,35 @@
+.manage-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.spot-grid {
+    display:grid;
+    justify-content: space-between;
+    justify-self: center;
+    width: 100%
+}
+
+.in-line h2{
+    justify-self: flex-end;
+}
+
+a {
+    width: 100%
+}
+
+
+h2 {
+    font-size: 14px;
+    font-weight: medium
+}
+
+/* .left {
+    float:left
+}
+
+.right {
+    float: right
+} */

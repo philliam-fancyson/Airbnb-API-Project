@@ -10,13 +10,12 @@ const loadAll = (reviews) => {
 }
 
 // Action Creator and Thunks
-
 export const getAllReviews = (spotId) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`);
 
     if (response.ok) {
         const reviews = await response.json();
-        dispatch(loadAll(reviews));
+        dispatch(loadAll(reviews.Review));
         return reviews;
     }
 }

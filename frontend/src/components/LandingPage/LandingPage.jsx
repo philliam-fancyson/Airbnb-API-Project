@@ -18,7 +18,6 @@ function LandingPage() {
     },[dispatch])
 
     if (!allSpots.length) {
-        console.log("Debug")
         return null
     }
 
