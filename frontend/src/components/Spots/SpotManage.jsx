@@ -57,7 +57,7 @@ function ManageSpots() {
                         // data-tooltip-content="Hello world!"
                         >
                             {/* <Tooltip id="my-tooltip"> */}
-                                <img src={spot.previewImage ? spot.previewImage : "placeholder"} />
+                                <img src={spot.previewImage ? "https://picsum.photos/250/300" : "https://picsum.photos/250/300"} />
                             {/* </Tooltip> */}
                         </Link>
                         <div className="in-line">
