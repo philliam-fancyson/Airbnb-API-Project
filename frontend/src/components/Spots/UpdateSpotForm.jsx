@@ -77,12 +77,11 @@ function UpdateSpotForm() {
             name,
             description,
             price,
-            spotId
         };
 
-        let createdSpot;
+        let updatedSpot;
         try {
-            createdSpot = await dispatch(updateSpot(payload));
+            updatedSpot = await dispatch(updateSpot(payload, spotId));
         } catch (error) {
             throw error
         }
@@ -100,7 +99,7 @@ function UpdateSpotForm() {
         //     };
         // };
 
-        navigate(`/spots/${createdSpot.id}`);
+        navigate(`/spots/${spotId}`);
     };
 
     //TODO Maybe: Update Spot

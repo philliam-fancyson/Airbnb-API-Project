@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { FaStar } from "react-icons/fa6";
 import './SpotDetails.css'
 import { LuDot } from "react-icons/lu";
+import OpenModalButton from "../OpenModalButton/OpenModalButton";
 
 function SpotDetails () {
     const dispatch = useDispatch();
@@ -16,6 +17,8 @@ function SpotDetails () {
     const reviews = useSelector(state => state.review.reviews)
     const spotOwner = spot.Owner
     const options = { month: 'long', year: 'numeric' };
+    const [showMenu, setShowMenu] = useState(false);
+    const ulRef = useRef();
 
 
     useEffect(() => {
@@ -25,6 +28,22 @@ function SpotDetails () {
     useEffect(() => {
         dispatch(getAllReviews(spotId))
     }, [dispatch, spotId])
+
+    useEffect(() => {
+        if (!showMenu) return;
+
+        const closeMenu = (e) => {
+          if (!ulRef.current.contains(e.target)) {
+            setShowMenu(false);
+          }
+        };
+
+        document.addEventListener('click', closeMenu);
+
+        return () => document.removeEventListener("click", closeMenu);
+      }, [showMenu]);
+
+    const closeMenu = () => setShowMenu(false);
 
     const handleClick = () => {
         window.alert("Feature Coming Soon...")
@@ -51,6 +70,11 @@ function SpotDetails () {
                 </div>
                 <div className="spot-reviews">
                     <h3>{spot.avgStarRating ? <><FaStar /> {parseInt(spot.avgStarRating).toFixed(2)} </>: <><FaStar />{"New"}</>} {spot.numReviews !== 0 ? <><LuDot /> {(spot.numReviews === 1 ? spot.numReviews + " review" : spot.numReviews + " reviews")}</> : null}</h3>
+                    <OpenModalButton
+                        buttonText="Post Your Review"
+                        onButtonClick={closeMenu}
+                        modalComponent={<CreateReviewModal />}
+                        />
                     {reviews ? reviews.map(review => (
                         <div className="review-box" key={review.id}>
                             <h3>{review.User.firstName}</h3>
