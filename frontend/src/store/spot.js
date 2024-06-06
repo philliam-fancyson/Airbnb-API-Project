@@ -159,7 +159,7 @@ const spotReducer = (state = initialState, action) => {
             newState = {...state}
             // ! This shows empty states like emptyx26 27 is the spot.. might need to look into this
             newState.spots[action.newSpot.id] = action.newSpot
-            console.log("CREATE SPOT", newState )
+            console.log("LOGGING CREATED SPOT", newState )
             return newState
         case REMOVE_SPOT:
             newState = {...state}

@@ -10,7 +10,8 @@ function Navigation({ isLoaded }) {
     <nav id="navBar">
       <ul>
         <li id="navBar-left">
-          <NavLink to="/"><img src="/geekbnblogo.png" /></NavLink>
+          {/* <NavLink to="/"><img src="/geekbnblogo.png" /></NavLink> */}
+          <NavLink to="/">Home</NavLink>
         </li>
         <div id='navBar-right'>
         {sessionUser && (
