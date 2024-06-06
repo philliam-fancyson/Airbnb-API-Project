@@ -21,7 +21,7 @@ function CreateSpotForm() {
     let spotId;
 
     // Spot Image
-    const [image1, setImage1] = useState("")
+    const [image1, setImage1] = useState({})
     const [image2, setImage2] = useState("")
     const [image3, setImage3] = useState("")
     const [image4, setImage4] = useState("")
@@ -48,6 +48,15 @@ function CreateSpotForm() {
         } catch (error) {
             throw error
         }
+
+        await dispatch(addASpotImage(createdSpot.id, image1))
+
+        let image2 = {
+            url: image2,
+            preview: false
+        }
+
+        await dispatch(addASpotImage(spotId, image2))
 
         // console.log(createdSpot);
         navigate(`/spots/${createdSpot.id}`)
@@ -157,16 +166,19 @@ function CreateSpotForm() {
                 <input
                     type="text"
                     name="image"
-                    value={ image1 }
+                    value={ image1.url }
                     placeholder="Preview Image URL"
-                    onChange={(e) => setImage1(e.target.value)}
+                    onChange={(e) => setImage1({
+                        url: e.target.value,
+                        preview: true
+                    })}
                 />
                 <input
                     type="text"
                     name="image"
                     value={ image2 }
                     placeholder="Image URL"
-                    onChange={(e) => setImage2(e.target.value)}
+                    onChange={(e) => setImage2()}
                 />
                 <input
                     type="text"

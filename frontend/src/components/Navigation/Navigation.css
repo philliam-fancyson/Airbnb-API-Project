@@ -1,3 +1,24 @@
-h1 {
-    color: #3e4684
+#navBar {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+#navBar ul {
+    list-style-type: none;
+  }
+
+  #navBar ul li {
+    display: inline
+  }
+
+#navBar-left {
+    align-items: center;
+    justify-content: left;
+}
+
+#navBar-right {
+    display: inline;
+    align-items: center;
+    justify-content: flex-end;
 }

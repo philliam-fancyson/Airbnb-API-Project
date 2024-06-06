@@ -5,7 +5,7 @@ import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import './ProfileButton.css'
-import { RxDropdownMenu } from "react-icons/rx";
+import { CgProfile } from "react-icons/cg";
 import { Link, useNavigate } from 'react-router-dom';
 
 function ProfileButton({ user }) {
@@ -46,9 +46,10 @@ function ProfileButton({ user }) {
 
   return (
     <>
-        <RxDropdownMenu
+        <CgProfile
             onClick={toggleMenu}
             className="dropdown-icon"
+            style={{"color": "#FF5A5F"}}
         />
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
