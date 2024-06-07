@@ -64,8 +64,13 @@ export const getUserSpots = () => async dispatch => {
 
     if (response.ok) {
         const list = await response.json();
-        dispatch(loadAll(list.Spots));
-        return list
+        if (list.Spots) {
+            dispatch(loadAll(list.Spots));
+            return list
+        } else {
+            // return empty array if there is nothing
+            dispatch(loadAll([]))
+        }
     }
 };
 
@@ -152,7 +157,6 @@ const spotReducer = (state = initialState, action) => {
         case LOAD_ONE_SPOT:
             return { ...state, spot: action.spot }
         case ADD_SPOT:
-            console.log(state)
             newState = {
                 ...state,
                 spots: [...state.spots, action.spot]
