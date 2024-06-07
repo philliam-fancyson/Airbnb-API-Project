@@ -171,9 +171,6 @@ const spotReducer = (state = initialState, action) => {
         case UPDATE_SPOT:
             newState = {
                 ...state,
-                spots: state.spot.maps(spot => {
-                    spot.id === action.spot.id ? { ...spot, ...action.spot} : spot
-                })
             };
             return newState
         default:

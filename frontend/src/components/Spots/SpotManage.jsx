@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSelector } from "react-redux"
 import { getUserSpots } from "../../store/spot";
+import { getASpot } from '../../store/spot';
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { FaStar } from "react-icons/fa6";
@@ -36,6 +37,14 @@ function ManageSpots() {
 
     const closeMenu = () => setShowMenu(false);
 
+    const loadSpot = (spotId) => {
+        dispatch(getASpot(spotId))
+    }
+
+    if (!userSpots) {
+        return <div>Loading...</div>
+    }
+
     return (
         <>
             <div>
@@ -55,7 +64,7 @@ function ManageSpots() {
                             </div>
                             <p>{`$${spot.price} night`}</p>
                             </Link>
-                            <Link to={`/spots/${spot.id}/edit`} ><button>Update</button></Link>
+                            <Link to={`/spots/${spot.id}/edit`}><button onClick={loadSpot(spot.id)}>Update</button></Link>
                             <OpenModalButton
                                 buttonText="Delete"
                                 onButtonClick={closeMenu}

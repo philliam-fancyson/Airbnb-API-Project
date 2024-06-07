@@ -99,6 +99,10 @@ function UpdateSpotForm() {
 
     //TODO Maybe: Update Spot
 
+    if (!spot) {
+        return null;
+    }
+
     return (
         <form
             className="spot-form"
