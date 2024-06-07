@@ -24,22 +24,23 @@ function LandingPage() {
     return (
         <div className="landing-grid">
             {allSpots.map((spot, index) =>
-                <div key={index} className="spot-grid">
-                    <Link
+                <Link
                     to={`/spots/${spot.id}`}
                     data-tooltip-id="my-tooltip"
                     data-tooltip-content="Hello world!"
                     >
-                        {/* <Tooltip id="my-tooltip"> */}
-                            <img src={spot.previewImage ? "https://picsum.photos/250/300" : "placeholder"} />
-                        {/* </Tooltip> */}
-                    </Link>
-                    <div className="in-line">
-                        <h2 style={{"textAlign": "left", "width": "49%"}}>{spot.city}, {spot.state}</h2>
-                        <p style={{"textAlign": "right", "width": "49%"}}>{spot.avgRating ? <><FaStar />{parseInt(spot.avgRating).toFixed(1)}</>: <><FaStar /> New</>}</p>
+                    <div key={index} className="spot-grid">
+                            {/* <Tooltip id="my-tooltip"> */}
+                                <img src={spot.previewImage ? "https://picsum.photos/250/300" : "placeholder"} />
+                            {/* </Tooltip> */}
+
+                        <div className="in-line">
+                            <h2 style={{"textAlign": "left", "width": "49%"}}>{spot.city}, {spot.state}</h2>
+                            <p style={{"textAlign": "right", "width": "49%"}}>{spot.avgRating ? <><FaStar />{parseInt(spot.avgRating).toFixed(1)}</>: <><FaStar /> New</>}</p>
+                        </div>
+                        <p>{`$${spot.price} night`}</p>
                     </div>
-                    <p>{`$${spot.price} night`}</p>
-                </div>
+                </Link>
             )}
         </div>
     )

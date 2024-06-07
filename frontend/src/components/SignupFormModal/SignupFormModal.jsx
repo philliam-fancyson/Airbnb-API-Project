@@ -14,18 +14,17 @@ function SignupFormModal() {
     const [lastName, setLastName] = useState("");
     const [errors, setErrors] = useState({});
     const [validationErrors, setValidationErrors] = useState({})
-    const [hasSubmitted, setHasSubmitted] = useState(false)
     const { closeModal } = useModal();
 
     useEffect(() => {
         const errors = {};
-        if (username.length < 4) errors.usernameLength = "Username must be more than 4 characters"
-        if (password.length < 6) errors.passwordLength = "Password must be more than 6 characeters"
-        if (!confirmPassword) errors.confirmPassword  = "Confirm Password is required"
-        if (!firstName) errors.firstName = "First name is required"
-        if (!lastName) errors.lastName = "Last name is required"
-        if (!username) errors.username = "Username is required"
-        if (!email) errors.email = "Email is required"
+        if (username.length < 4) errors.usernameLength = true;
+        if (password.length < 6) errors.passwordLength = true;
+        if (!confirmPassword) errors.confirmPassword  = true;
+        if (!firstName) errors.firstName = true;
+        if (!lastName) errors.lastName = true;
+        if (!username) errors.username = true;
+        if (!email) errors.email = true;
         setValidationErrors(errors)
     }, [username, password, confirmPassword, firstName, lastName, username, email])
 
@@ -125,7 +124,7 @@ function SignupFormModal() {
                 </input>
             </label>
             {errors.lastName && <p style={{color: 'red'}}>{errors.lastName}</p>}
-            <button type="submit" disabled={Object.keys(validationErrors).length}>Log In</button>
+            <button type="submit" disabled={Object.keys(validationErrors).length}>Sign Up</button>
         </form>
         </>
     )
