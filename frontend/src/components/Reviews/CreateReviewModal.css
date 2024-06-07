@@ -1,11 +1,14 @@
 .stars-input {
     display: flex;
+    margin-top: 10px;
   }
 
 .stars-input .filled {
-    color: saddlebrown;
+  color: gold;
+  align-content: center;
   }
 
 .stars-input .empty {
-    color: burlywood;
+  color: gold;
+  align-content: center;
 }

@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { FaRegStar } from "react-icons/fa6";
+import { FaStar } from "react-icons/fa6";
+import './CreateReviewModal.css';
 
 function StarRatingInput({stars, onChange}) {
     const [activeRating, setActiveRating] = useState(stars);
@@ -17,7 +19,7 @@ function StarRatingInput({stars, onChange}) {
                 onMouseLeave={() => {setActiveRating(stars)}}
                 onClick={() => {onChange(1)} }
                 >
-                    <FaRegStar />
+                    {activeRating >= 1 ? <FaStar />: <FaRegStar />}
                 </div>
                 <div
                 className={activeRating >= 2 ? "filled" : "empty"}
@@ -25,7 +27,7 @@ function StarRatingInput({stars, onChange}) {
                 onMouseLeave={() => {setActiveRating(stars)}}
                 onClick={() => {onChange(2)} }
                 >
-                    <FaRegStar />
+                    {activeRating >= 2 ? <FaStar />: <FaRegStar />}
                 </div>
                 <div
                 className={activeRating >= 3 ? "filled" : "empty"}
@@ -33,7 +35,7 @@ function StarRatingInput({stars, onChange}) {
                 onMouseLeave={() => {setActiveRating(stars)}}
                 onClick={() => {onChange(3)} }
                 >
-                    <FaRegStar />
+                    {activeRating >= 3 ? <FaStar />: <FaRegStar />}
                 </div>
                 <div
                 className={activeRating >= 4 ? "filled" : "empty"}
@@ -41,7 +43,7 @@ function StarRatingInput({stars, onChange}) {
                 onMouseLeave={() => {setActiveRating(stars)}}
                 onClick={() => {onChange(4)} }
                 >
-                    <FaRegStar />
+                    {activeRating >= 4? <FaStar />: <FaRegStar />}
                 </div>
                 <div
                 className={activeRating >= 5 ? "filled" : "empty"}
@@ -49,9 +51,11 @@ function StarRatingInput({stars, onChange}) {
                 onMouseLeave={() => {setActiveRating(stars)}}
                 onClick={() => {onChange(5)} }
                 >
-                    <FaRegStar />
+                    {activeRating >= 5 ? <FaStar />: <FaRegStar />}
                 </div>
+                <p style={{"padding-left": "10px"}}>Stars</p>
             </div>
+
         </>
     )
 }
