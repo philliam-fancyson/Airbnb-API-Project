@@ -1,3 +1,21 @@
-.spot-callout-box {
+#spot-details {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#spot-description-box {
+    display: flex;
+    padding-bottom: 20px;
+    border-bottom: 1px solid black;
+}
+
+#spot-description {
+    width: 70%;
+    margin-right: 10px
+}
+
+#spot-callout-box {
     border: 1px solid black;
+    width: 30%;
+    margin-left: 10px;
 }
