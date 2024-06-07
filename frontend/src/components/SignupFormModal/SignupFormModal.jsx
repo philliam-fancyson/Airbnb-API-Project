@@ -18,15 +18,15 @@ function SignupFormModal() {
 
     useEffect(() => {
         const errors = {};
+        if (!username) errors.username = true;
         if (username.length < 4) errors.usernameLength = true;
         if (password.length < 6) errors.passwordLength = true;
         if (!confirmPassword) errors.confirmPassword  = true;
         if (!firstName) errors.firstName = true;
         if (!lastName) errors.lastName = true;
-        if (!username) errors.username = true;
         if (!email) errors.email = true;
         setValidationErrors(errors)
-    }, [username, password, confirmPassword, firstName, lastName, username, email])
+    }, [username, password, confirmPassword, firstName, lastName, email])
 
     const handleSubmit = (e) => {
         e.preventDefault();

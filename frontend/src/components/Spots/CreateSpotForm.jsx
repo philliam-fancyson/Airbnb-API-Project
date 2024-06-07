@@ -7,7 +7,6 @@ import { addImageToSpot } from "../../store/spot";
 
 function CreateSpotForm() {
     const sessionUser = useSelector(state => state.session.user);
-    const newSpot = useSelector(state => state.spot.spot)
     const navigate = useNavigate();
     const dispatch = useDispatch();
     // Spot Information
@@ -69,11 +68,8 @@ function CreateSpotForm() {
         };
 
         let createdSpot;
-        try {
-            createdSpot = await dispatch(addASpot(payload));
-        } catch (error) {
-            throw error
-        }
+        createdSpot = await dispatch(addASpot(payload));
+
 
         const previewImage = {url: image1, preview: true, spotId: createdSpot.id};
         await dispatch(addImageToSpot(previewImage));
@@ -84,11 +80,11 @@ function CreateSpotForm() {
             if (image.length) {
                 const addImage = {url: image, preview: false, spotId: createdSpot.id};
                 await dispatch(addImageToSpot(addImage))
-            };
-        };
+            }
+        }
 
         navigate(`/spots/${createdSpot.id}`);
-    };
+    }
 
     //TODO: Create Spot Image function
 
@@ -99,7 +95,7 @@ function CreateSpotForm() {
         >
             {!sessionUser && <Navigate to="/" />}
             <h2>Create a new Spot</h2>
-            <h3>Where's your place located?</h3>
+            <h3>Where&apos;s your place located?</h3>
             <p>Guests will only get your exact address once they booked a reservation.</p>
             <label>
                 Country
@@ -189,7 +185,7 @@ function CreateSpotForm() {
             </div>
             <div className="spot-name">
                 <h3>Create a title for your spot</h3>
-                <p>Catch guests' attention with a spot title that highlights what makes your place special.</p>
+                <p>Catch guests&apos; attention with a spot title that highlights what makes your place special.</p>
                 <input
                     type="text"
                     name="name"

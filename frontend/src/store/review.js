@@ -55,7 +55,7 @@ export const addReview = (data, spotId, sessionUser) => async dispatch => {
         const errors = await response.json();
         console.log("ERROR ", errors)
         return errors
-    };
+    }
 };
 
 export const removeReview = (reviewId) => async dispatch => {
@@ -82,17 +82,18 @@ const sortDate = (list) => {
 
 const reviewReducer = (state = initialState, action) => {
     let newState;
+    let allCurrentReviews = {};
+    let updatedReviews;
     switch(action.type) {
         case LOAD_REVIEWS:
             console.log(action.reviews)
             if (!action.reviews) {
                 newState = {...state, reviews: []}
                 return newState
-            };
+            }
 
             sortDate(action.reviews);
 
-            const allCurrentReviews = {};
             action.reviews.forEach(review => {
                 allCurrentReviews[review.id] = review
             });
@@ -105,7 +106,7 @@ const reviewReducer = (state = initialState, action) => {
             return newState
         case ADD_REVIEW:
             action.review.User = action.user
-            const updatedReviews = [...state.reviews, action.review]
+            updatedReviews = [...state.reviews, action.review]
 
             newState = {
                 ...state,
