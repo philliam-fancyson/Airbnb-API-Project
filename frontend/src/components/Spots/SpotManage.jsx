@@ -36,10 +36,10 @@ function ManageSpots() {
 
     const closeMenu = () => setShowMenu(false);
 
-    // Short Circuit
-    if (!userSpots.length) {
-        return null
-    }
+    // // Short Circuit
+    // if (!userSpots) {
+    //     return null
+    // }
 
     return (
         <>
@@ -47,33 +47,29 @@ function ManageSpots() {
                 <h2>Manage Your Spots</h2>
                 <Link to='/spots/new'><button>Create a New Spot</button></Link>
             </div>
-            <div className="manage-grid">
-
-                {userSpots.map((spot, index) =>
-                    <div key={index} className="spot-grid">
-                        <Link
-                        to={`/spots/${spot.id}`}
-                        // data-tooltip-id="my-tooltip"
-                        // data-tooltip-content="Hello world!"
-                        >
+            {userSpots &&<div className="manage-grid">
+                {userSpots && userSpots.map((spot, index) =>
+                        <div key={index} className="spot-grid">
+                            <Link to={`/spots/${spot.id}`}>
                             {/* <Tooltip id="my-tooltip"> */}
-                                <img src={spot.previewImage ? "https://picsum.photos/250/300" : "https://picsum.photos/250/300"} />
+                            <img src={spot.previewImage ? "https://picsum.photos/250/300" : "https://picsum.photos/250/300"} />
                             {/* </Tooltip> */}
-                        </Link>
-                        <div className="in-line">
-                            <h2 style={{"textAlign": "left", "width": "49%"}}>{spot.city}, {spot.state}</h2>
-                            <p style={{"textAlign": "right", "width": "49%"}}>{spot.avgRating ? <><FaStar />{parseInt(spot.avgRating).toFixed(1)}</>: <><FaStar /> New</>}</p>
+                            <div className="in-line">
+                                <h2 style={{"textAlign": "left", "width": "49%"}}>{spot.city}, {spot.state}</h2>
+                                <p style={{"textAlign": "right", "width": "49%"}}>{spot.avgRating ? <><FaStar />{parseInt(spot.avgRating).toFixed(1)}</>: <><FaStar /> New</>}</p>
+                            </div>
+                            <p>{`$${spot.price} night`}</p>
+                            </Link>
+                            <Link to={`/spots/${spot.id}/edit`} ><button>Update</button></Link>
+                            <OpenModalButton
+                                buttonText="Delete"
+                                onButtonClick={closeMenu}
+                                modalComponent={<DeleteSpotModal spotId={spot.id}/>}
+                            />
                         </div>
-                        <p>{`$${spot.price} night`}</p>
-                        <Link to={`/spots/${spot.id}/edit`} ><button>Update</button></Link>
-                        <OpenModalButton
-                            buttonText="Delete"
-                            onButtonClick={closeMenu}
-                            modalComponent={<DeleteSpotModal spotId={spot.id}/>}
-                        />
-                    </div>
+
                 )}
-            </div>
+            </div>}
         </>
     )
 }

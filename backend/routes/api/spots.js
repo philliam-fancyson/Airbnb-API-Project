@@ -312,7 +312,7 @@ router.get('/:spotId/reviews', async(req, res, next) => {
             review.dataValues.ReviewImage = reviewImages.length > 0 ? reviewImages : null;
         };
         res.json({
-            Review: userReviews
+            Reviews: userReviews
         });
     } else {
         res.json({
@@ -453,7 +453,7 @@ router.post('/:spotId/reviews', [requireAuth, validateReview], async(req, res, n
     // Check if user already has a review for this Spot
     const userReview = await Review.findAll({
         where: {
-            spotId: req.params.spotId,
+            spotId: parseInt(req.params.spotId),
             userId: user.id
         }
     });

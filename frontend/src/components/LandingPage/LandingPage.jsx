@@ -17,7 +17,7 @@ function LandingPage() {
         dispatch(getAllSpots())
     },[dispatch])
 
-    if (!allSpots.length) {
+    if (!allSpots) {
         return null
     }
 
@@ -28,8 +28,9 @@ function LandingPage() {
                     to={`/spots/${spot.id}`}
                     data-tooltip-id="my-tooltip"
                     data-tooltip-content="Hello world!"
+                    key={index}
                     >
-                    <div key={index} className="spot-grid">
+                    <div className="spot-grid">
                             {/* <Tooltip id="my-tooltip"> */}
                                 <img src={spot.previewImage ? "https://picsum.photos/250/300" : "placeholder"} />
                             {/* </Tooltip> */}

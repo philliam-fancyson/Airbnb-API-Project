@@ -21,11 +21,10 @@ const loadOne = (spot) => {
     }
 }
 
-// ? Should I consolidate addSpotImage with addSpot?
-const addSpot = (newSpot) => {
+const addSpot = (spot) => {
     return {
         type: ADD_SPOT,
-        newSpot
+        spot
     }
 }
 
@@ -156,10 +155,15 @@ const spotReducer = (state = initialState, action) => {
         case LOAD_ONE_SPOT:
             return { ...state, spot: action.spot }
         case ADD_SPOT:
-            newState = {...state}
+            console.log(state)
+            newState = {
+                ...state,
+                spots: state.spots.map(spot => {
+                    if (spot.id !== action.spot.id) return spot
+                    return {...spot}
+                    })
+                }
             // ! This shows empty states like emptyx26 27 is the spot.. might need to look into this
-            newState.spots[action.newSpot.id] = action.newSpot
-            console.log("LOGGING CREATED SPOT", newState )
             return newState
         case REMOVE_SPOT:
             newState = {...state}

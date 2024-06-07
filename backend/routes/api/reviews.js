@@ -54,7 +54,7 @@ router.get('/current', requireAuth, async(req, res) => {
 
     if (userReviews.length >= 1) {
         res.json({
-            Review: userReviews
+            Reviews: userReviews
         })
     } else {
         res.json({
