@@ -3,23 +3,25 @@
     grid-template-columns: repeat(4, 1fr);
     grid-column-gap: 20px;
     grid-row-gap: 20px;
+    margin: auto 10px;
+    justify-content: center;
+    align-items: center;
 }
 
 .spot-grid {
-    display:grid;
     justify-content: space-between;
     justify-self: center;
+    width: 100%;
+    margin: 10px;
+}
+
+.in-line {
     width: 100%
 }
 
 .in-line h2{
     justify-self: flex-end;
 }
-
-a {
-    width: 100%
-}
-
 
 h2 {
     font-size: 14px;

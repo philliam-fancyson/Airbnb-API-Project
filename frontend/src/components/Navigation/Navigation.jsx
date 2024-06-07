@@ -8,24 +8,21 @@ function Navigation({ isLoaded }) {
 
   return (
     <nav id="navBar">
-      <ul>
-        <li id="navBar-left">
-          {/* <NavLink to="/"><img src="/geekbnblogo.png" /></NavLink> */}
-          <NavLink to="/">Home</NavLink>
-        </li>
+        <div id="navBar-left">
+          <NavLink to="/"><img src="/geekbnblogo.png" /></NavLink>
+        </ div>
         <div id='navBar-right'>
         {sessionUser && (
-          <li>
+          <div>
             <NavLink to="/spots/new">Create a New Spot</NavLink>
-          </li>
+          </ div>
         )}
         {isLoaded && (
-          <li>
+          <div>
             <ProfileButton user={sessionUser} />
-          </li>
+          </ div>
         )}
         </div>
-      </ ul>
     </nav>
   );
 }

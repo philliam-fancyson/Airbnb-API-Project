@@ -84,7 +84,7 @@ function ProfileButton({ user }) {
           </>
         )}
       </ul>
-    </>
+    </ >
   );
 }
 
