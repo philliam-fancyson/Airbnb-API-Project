@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import * as sessionActions from '../../store/session';
@@ -13,7 +13,21 @@ function SignupFormModal() {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [errors, setErrors] = useState({});
+    const [validationErrors, setValidationErrors] = useState({})
+    const [hasSubmitted, setHasSubmitted] = useState(false)
     const { closeModal } = useModal();
+
+    useEffect(() => {
+        const errors = {};
+        if (username.length < 4) errors.usernameLength = "Username must be more than 4 characters"
+        if (password.length < 6) errors.passwordLength = "Password must be more than 6 characeters"
+        if (!confirmPassword) errors.confirmPassword  = "Confirm Password is required"
+        if (!firstName) errors.firstName = "First name is required"
+        if (!lastName) errors.lastName = "Last name is required"
+        if (!username) errors.username = "Username is required"
+        if (!email) errors.email = "Email is required"
+        setValidationErrors(errors)
+    }, [username, password, confirmPassword, firstName, lastName, username, email])
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -55,7 +69,7 @@ function SignupFormModal() {
                 >
                 </input>
             </label>
-            {errors.username && <p style={{color: 'red'}}>{errors.username}</p>}
+            {errors.username && <p style={{color: 'red'}}>Username must be unique</p>}
             <label>
                 Email
                 <input
@@ -111,7 +125,7 @@ function SignupFormModal() {
                 </input>
             </label>
             {errors.lastName && <p style={{color: 'red'}}>{errors.lastName}</p>}
-            <button type="submit">Log In</button>
+            <button type="submit" disabled={Object.keys(validationErrors).length}>Log In</button>
         </form>
         </>
     )

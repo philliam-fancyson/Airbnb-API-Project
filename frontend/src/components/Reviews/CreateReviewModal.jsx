@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import StarRatingInput from './StarRatingInput';
 import { addReview } from '../../store/review';
-import { getAllReviews } from '../../store/review';
 
 function CreateReviewModal({spotId, sessionUser}) {
     const dispatch = useDispatch();
@@ -26,7 +25,6 @@ function CreateReviewModal({spotId, sessionUser}) {
         const newReview = { review, stars}
         setErrors({})
         return dispatch(addReview(newReview, spotId, sessionUser))
-            .then(dispatch(getAllReviews(spotId)))
             .then(closeModal)
             .catch(async (res) => {
                 const data = await res.json();
