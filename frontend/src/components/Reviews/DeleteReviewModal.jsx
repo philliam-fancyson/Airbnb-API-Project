@@ -3,13 +3,13 @@ import { useModal } from '../../context/Modal';
 import { removeReview } from '../../store/review';
 import { getAllReviews } from "../../store/review";
 
-function DeleteReviewModal({reviewId}) {
+function DeleteReviewModal({reviewId, spotId}) {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
 
     const onClick = () => {
         return dispatch(removeReview(reviewId))
-            .then(dispatch(getAllReviews()))
+            .then(dispatch(getAllReviews(spotId)))
             .then(closeModal)
     };
 

@@ -1,22 +1,39 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import StarRatingInput from './StarRatingInput';
 import { addReview } from '../../store/review';
 import { getAllReviews } from '../../store/review';
 
-function CreateReviewModal({spotId}) {
-    const [stars, setStars] = useState(0);
+function CreateReviewModal({spotId, sessionUser}) {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
     const [review, setReview] = useState("")
+    const [stars, setStars] = useState(0);
+    const [validationErrors, setValidationError] = useState({})
+    const [errors, setErrors] = useState({})
 
-    const handleSubmit = async (e) => {
+    useEffect(() => {
+        const errors = {};
+        if (stars === 0 ) errors.star = "Please enter an input";
+        if (review.length < 10) errors.review = "Less than 10 characters"
+
+        setValidationError(errors);
+    }, [stars, review])
+
+    const handleSubmit = (e) => {
         e.preventDefault();
         const newReview = { review, stars}
-        return await dispatch(addReview(newReview, spotId))
-            .then(dispatch(getAllReviews()))
+        setErrors({})
+        return dispatch(addReview(newReview, spotId, sessionUser))
+            .then(dispatch(getAllReviews(spotId)))
             .then(closeModal)
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data?.errors) {
+                    setErrors(data.errors)
+                }
+            })
     };
 
 
@@ -29,6 +46,9 @@ function CreateReviewModal({spotId}) {
     return (
         <form onSubmit={(handleSubmit)}>
             <h1>How was your stay?</h1>
+            {errors.message && (
+                <p>{errors.message}</p>
+            )}
             <textarea
                 type="text"
                 name="review"
@@ -40,7 +60,11 @@ function CreateReviewModal({spotId}) {
                 onChange={onChange}
                 stars={stars}
             />
-            <button type="submit">Submit Your Review</button>
+
+            <button
+            type="submit"
+            disabled={Object.keys(validationErrors).length}
+            >Submit Your Review</button>
         </form>
     )
 }

@@ -49,8 +49,8 @@ function ManageSpots() {
             </div>
             <div className="manage-grid">
 
-                {userSpots.map((spot) =>
-                    <div key={spot.id} className="spot-grid">
+                {userSpots.map((spot, index) =>
+                    <div key={index} className="spot-grid">
                         <Link
                         to={`/spots/${spot.id}`}
                         // data-tooltip-id="my-tooltip"

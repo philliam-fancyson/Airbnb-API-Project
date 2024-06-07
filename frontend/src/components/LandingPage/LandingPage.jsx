@@ -23,8 +23,8 @@ function LandingPage() {
 
     return (
         <div className="landing-grid">
-            {allSpots.map((spot) =>
-                <div key={spot.id} className="spot-grid">
+            {allSpots.map((spot, index) =>
+                <div key={index} className="spot-grid">
                     <Link
                     to={`/spots/${spot.id}`}
                     data-tooltip-id="my-tooltip"

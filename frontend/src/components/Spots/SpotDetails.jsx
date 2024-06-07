@@ -24,10 +24,14 @@ function SpotDetails () {
     const reviews = useSelector(state => state.review.reviews)
     const spotOwner = spot.Owner
 
+    console.log(reviews)
+
     let nonReviewer = true;
-    reviews.forEach(review => {
-        if (review.User.id === sessionUserId) nonReviewer = false
-    })
+    if (reviews) {
+        reviews.forEach(review => {
+            if (review.User.id === sessionUserId) nonReviewer = false
+        })
+    }
 
     const options = { month: 'long', year: 'numeric' };
     const [showMenu, setShowMenu] = useState(false);
@@ -35,11 +39,11 @@ function SpotDetails () {
 
 
     useEffect(() => {
-        dispatch(getASpot(spotId))
+        dispatch(getASpot((spotId)))
     }, [dispatch, spotId])
 
     useEffect(() => {
-        dispatch(getAllReviews(spotId))
+        dispatch(getAllReviews((spotId)))
     }, [dispatch, spotId])
 
     // !Modal Begins
@@ -88,7 +92,7 @@ function SpotDetails () {
                 {sessionUser && spotOwner?.id !== sessionUserId && nonReviewer && <OpenModalButton
                                                         buttonText="Post Your Review"
                                                         onButtonClick={closeMenu}
-                                                        modalComponent={<CreateReviewModal spotId={spot.id}/>}
+                                                        modalComponent={<CreateReviewModal spotId={spot.id} sessionUser={sessionUser}/>}
                                                         />}
                 {reviews ? reviews.map(review => (
                     <div className="review-box" key={review.id}>
@@ -98,7 +102,7 @@ function SpotDetails () {
                             {review.User.id === sessionUserId && <OpenModalButton
                                                                         buttonText="Delete Your Review"
                                                                         onButtonClick={closeMenu}
-                                                                        modalComponent={<DeleteReviewModal reviewId={review.id}/>}
+                                                                        modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spot.id}/>}
                                                                         />}
                     </ div>
                 )) : "Be the first to review!"}
