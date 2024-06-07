@@ -1,7 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import { removeASpot } from '../../store/spot';
-import { getUserSpots } from '../../store/spot';
 
 function DeleteSpotModal({spotId}) {
     const dispatch = useDispatch();
@@ -9,7 +8,6 @@ function DeleteSpotModal({spotId}) {
 
     const onClick = () => {
         return dispatch(removeASpot(spotId))
-            .then(dispatch(getUserSpots()))
             .then(closeModal)
     };
 

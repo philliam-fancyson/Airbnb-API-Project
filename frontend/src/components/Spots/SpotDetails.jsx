@@ -23,8 +23,9 @@ function SpotDetails () {
     const spot = useSelector(state => state.spot.spot);
     const reviews = useSelector(state => state.review.reviews)
     const spotOwner = spot.Owner
-
-    console.log(reviews)
+    const options = { month: 'long', year: 'numeric' };
+    const [showMenu, setShowMenu] = useState(false);
+    const ulRef = useRef();
 
     let nonReviewer = true;
     if (reviews) {
@@ -33,10 +34,8 @@ function SpotDetails () {
         })
     }
 
-    const options = { month: 'long', year: 'numeric' };
-    const [showMenu, setShowMenu] = useState(false);
-    const ulRef = useRef();
-
+    const avgStars = reviews.length ? (reviews.reduce((acc, review) => acc + review.stars, 0) / reviews.length).toFixed(1) : 'No Reivews'
+    const numReviews = reviews.length;
 
     useEffect(() => {
         dispatch(getASpot((spotId)))
@@ -70,7 +69,9 @@ function SpotDetails () {
 
     // TODO: CSS for image gallery
     // TODO: Spot Button
-    if (!spot) return null
+    if (!spot || !reviews) {
+        return <div>Loading...</div>
+    }
 
     return (
         <div>
@@ -84,11 +85,11 @@ function SpotDetails () {
             <div className="spot-callout-box">
                 <h3>${spot.price}</h3>
                 {/* <LuDot /> {spot.numReviews} {spot.numReviews === 1 ? "review" : "reviews"} */}
-                <p>{spot.avgStarRating ? <><FaStar /> {parseInt(spot.avgStarRating).toFixed(2)} </>: <><FaStar />{"New"}</>} {spot.numReviews !== 0 ? <><LuDot /> {(spot.numReviews === 1 ? spot.numReviews + " review" : spot.numReviews + " reviews")}</> : null} </p>
+                <p>{Number(avgStars) ? <><FaStar /> {avgStars} </>: <><FaStar />{"New"}</>} {numReviews !== 0 ? <><LuDot /> {(numReviews === 1 ? numReviews + " review" : numReviews + " reviews")}</> : null} </p>
                 <button onClick={handleClick}>Reserve</button>
             </div>
             <div className="spot-reviews">
-                <h3>{spot.avgStarRating ? <><FaStar /> {parseInt(spot.avgStarRating).toFixed(2)} </>: <><FaStar />{"New"}</>} {spot.numReviews !== 0 ? <><LuDot /> {(spot.numReviews === 1 ? spot.numReviews + " review" : spot.numReviews + " reviews")}</> : null}</h3>
+                <h3>{Number(avgStars) ? <><FaStar /> {avgStars} </>: <><FaStar />{"New"}</>} {numReviews !== 0 ? <><LuDot /> {(numReviews === 1 ? numReviews + " review" : numReviews + " reviews")}</> : null}</h3>
                 {sessionUser && spotOwner?.id !== sessionUserId && nonReviewer && <OpenModalButton
                                                         buttonText="Post Your Review"
                                                         onButtonClick={closeMenu}

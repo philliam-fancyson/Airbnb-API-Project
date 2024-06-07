@@ -82,6 +82,7 @@ const reviewReducer = (state = initialState, action) => {
                 newState = {...state, reviews: []}
                 return newState
             }
+
             const allCurrentReviews = {};
             action.reviews.forEach(review => {
                 allCurrentReviews[review.id] = review
@@ -91,24 +92,18 @@ const reviewReducer = (state = initialState, action) => {
                 ...state,
                 reviews: action.reviews
             }
+
             return newState
         case ADD_REVIEW:
-            console.log("original State")
-            console.log(state)
             action.review.User = action.user
+            const updatedReviews = [...state.reviews, action.review]
+
             newState = {
                 ...state,
-                [action.review.id]: {
-                    ...state[action.review.id],
-                    ...action.review
-                },
-                reviews: state.reviews.map(review => {
-                    if (review.id !== action.review.id) return review
-                    return {...review}
-                })
-            }
-            console.log("new State")
-            console.log(newState);
+                [action.review.id]: action.review,
+                reviews: updatedReviews
+            };
+
             return newState;
         case REMOVE_REVIEW:
             newState = {...state, reviews: state.reviews.filter(review => review.id !== action.reviewId)}

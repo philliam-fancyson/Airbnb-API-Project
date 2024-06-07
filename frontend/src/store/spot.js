@@ -42,10 +42,10 @@ const updateASpot = (spot) => {
     }
 }
 
-const removeSpot = (spot) => {
+const removeSpot = (spotId) => {
     return {
         type: REMOVE_SPOT,
-        spot
+        spotId
     }
 }
 
@@ -138,10 +138,7 @@ export const removeASpot = (spotId) => async dispatch => {
     });
 
     if (response.ok) {
-        const spot = await response.json();
-        dispatch(removeSpot(spot))
-        // Action returns {message: "Successfully Deleted"} in reducer
-        return spot
+        dispatch(removeSpot(spotId))
     }
 };
 
@@ -158,19 +155,22 @@ const spotReducer = (state = initialState, action) => {
             console.log(state)
             newState = {
                 ...state,
-                spots: state.spots.map(spot => {
-                    if (spot.id !== action.spot.id) return spot
-                    return {...spot}
-                    })
+                spots: [...state.spots, action.spot]
                 }
-            // ! This shows empty states like emptyx26 27 is the spot.. might need to look into this
             return newState
         case REMOVE_SPOT:
-            newState = {...state}
+            newState = {
+                ...state,
+                spots: state.spots.filter(spot => spot.id !== action.spotId)
+            }
             return newState
         case UPDATE_SPOT:
-            newState = {...state}
-            newState.spots[action.spot.id] = action.spot
+            newState = {
+                ...state,
+                spots: state.spot.maps(spot => {
+                    spot.id === action.spot.id ? { ...spot, ...action.spot} : spot
+                })
+            };
             return newState
         default:
             return state;

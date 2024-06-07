@@ -36,11 +36,6 @@ function ManageSpots() {
 
     const closeMenu = () => setShowMenu(false);
 
-    // // Short Circuit
-    // if (!userSpots) {
-    //     return null
-    // }
-
     return (
         <>
             <div>
