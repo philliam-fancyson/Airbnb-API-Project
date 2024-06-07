@@ -34,7 +34,7 @@ function SpotDetails () {
         })
     }
 
-    const avgStars = reviews.length ? (reviews.reduce((acc, review) => acc + review.stars, 0) / reviews.length).toFixed(1) : 'No Reivews'
+    const avgStars = reviews.length ? (reviews.reduce((acc, review) => acc + review.stars, 0) / reviews.length).toFixed(2) / 1 : 'No Reivews'
     const numReviews = reviews.length;
 
     useEffect(() => {
@@ -87,7 +87,6 @@ function SpotDetails () {
                 </div>
                 <div id="spot-callout-box">
                     <h3>${spot.price}</h3>
-                    {/* <LuDot /> {spot.numReviews} {spot.numReviews === 1 ? "review" : "reviews"} */}
                     <p>{Number(avgStars) ? <><FaStar /> {avgStars} </>: <><FaStar />{"New"}</>} {numReviews !== 0 ? <><LuDot /> {(numReviews === 1 ? numReviews + " review" : numReviews + " reviews")}</> : null} </p>
                     <button onClick={handleClick}>Reserve</button>
                 </div>
