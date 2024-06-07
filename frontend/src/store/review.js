@@ -73,6 +73,13 @@ export const removeReview = (reviewId) => async dispatch => {
 // Reducer
 const initialState = { reviews: [] }
 
+const sortDate = (list) => {
+    return list.sort((reviewA, reviewB) => {
+        console.log(reviewA)
+        return new Date(reviewB.createdAt) - new Date(reviewA.createdAt)
+    }).map((review) => review)
+};
+
 const reviewReducer = (state = initialState, action) => {
     let newState;
     switch(action.type) {
@@ -81,12 +88,14 @@ const reviewReducer = (state = initialState, action) => {
             if (!action.reviews) {
                 newState = {...state, reviews: []}
                 return newState
-            }
+            };
+
+            sortDate(action.reviews);
 
             const allCurrentReviews = {};
             action.reviews.forEach(review => {
                 allCurrentReviews[review.id] = review
-            })
+            });
             newState = {
                 ...allCurrentReviews,
                 ...state,
@@ -101,7 +110,7 @@ const reviewReducer = (state = initialState, action) => {
             newState = {
                 ...state,
                 [action.review.id]: action.review,
-                reviews: updatedReviews
+                reviews: sortDate(updatedReviews)
             };
 
             return newState;
