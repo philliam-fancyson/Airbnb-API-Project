@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSelector } from "react-redux"
 import { getUserSpots } from "../../store/spot";
-import { getASpot } from '../../store/spot';
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { FaStar } from "react-icons/fa6";
