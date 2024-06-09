@@ -34,7 +34,7 @@ function SpotDetails () {
         })
     }
 
-    const avgStars = reviews.length ? (reviews.reduce((acc, review) => acc + review.stars, 0) / reviews.length).toFixed(2) / 1 : 'No Reivews'
+    const avgStars = reviews.length ? (reviews.reduce((acc, review) => acc + review.stars, 0) / reviews.length).toFixed(2): 'No Reviews'
     const numReviews = reviews.length;
 
     useEffect(() => {
@@ -93,7 +93,7 @@ function SpotDetails () {
             </div>
             <div id="spot-reviews">
                 <h3>{Number(avgStars) ? <><FaStar /> {avgStars} </>: <><FaStar />{"New"}</>} {numReviews !== 0 ? <><LuDot /> {(numReviews === 1 ? numReviews + " review" : numReviews + " reviews")}</> : null}</h3>
-                {numReviews ===0 && spotOwner?.id !== sessionUserId && <h2>Be the first to Review!</h2>}
+                {numReviews ===0 && spotOwner?.id !== sessionUserId && <h2>Be the first to post a review!</h2>}
                 {sessionUser && spotOwner?.id !== sessionUserId && nonReviewer && <OpenModalButton
                                                         buttonText="Post Your Review"
                                                         onButtonClick={closeMenu}

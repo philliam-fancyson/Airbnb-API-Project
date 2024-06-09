@@ -2,12 +2,10 @@ import { useState, useEffect } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
-import { useNavigate } from 'react-router-dom';
 import './LoginForm.css';
 
 function LoginFormModal() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
@@ -26,7 +24,6 @@ function LoginFormModal() {
     e.preventDefault();
     dispatch(sessionActions.login({credential: "Demoman", password: "kaboom"}));
     closeModal();
-    navigate('/')
   }
 
   const handleSubmit = (e) => {

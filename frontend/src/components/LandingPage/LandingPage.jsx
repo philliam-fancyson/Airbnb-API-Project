@@ -4,8 +4,6 @@ import { getAllSpots } from "../../store/spot";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { FaStar } from "react-icons/fa6";
-// import { Tooltip } from 'react-tooltip'
-
 import './LandingPage.css'
 
 
@@ -27,18 +25,14 @@ function LandingPage() {
 
                 <Link
                     to={`/spots/${spot.id}`}
-                    data-tooltip-id="my-tooltip"
-                    data-tooltip-content="Hello world!"
                     key={index}
+                    title={spot.name}
                     >
                     <div className="spot-grid">
-                            {/* <Tooltip id="my-tooltip"> */}
-                                <img src={spot.previewImage}/>
-                            {/* </Tooltip> */}
-
+                            <img src={spot.previewImage}/>
                         <div className="in-line">
-                            <h2 style={{"textAlign": "left", "width": "49%"}}>{spot.city}, {spot.state}</h2>
-                            <p style={{"textAlign": "right", "width": "49%"}}>{spot.avgRating ? <><FaStar />{Number(spot.avgRating).toFixed(2)}</>: <><FaStar /> New</>}</p>
+                            <p>{spot.city}, {spot.state}</p>
+                            <p>{spot.avgRating ? <><FaStar />{Number(spot.avgRating).toFixed(2)}</>: <><FaStar /> New</>}</p>
                         </div>
                         <p>{`$${spot.price} night`}</p>
                     </div>

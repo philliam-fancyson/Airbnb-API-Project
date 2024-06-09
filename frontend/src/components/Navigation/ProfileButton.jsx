@@ -14,8 +14,6 @@ function ProfileButton({ user }) {
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
 
-  console.log(user)
-
   const toggleMenu = (e) => {
     e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
     setShowMenu(!showMenu);
@@ -58,7 +56,7 @@ function ProfileButton({ user }) {
           <>
             <li>Hello {user.firstName}</li>
             <li>{user.email}</li>
-            <li><Link to='/spots/manage'><button>Manage Spots</button></Link></li>
+            <li><Link to='/spots/manage'><button onClick={closeMenu}>Manage Spots</button></Link></li>
             <li>
               <button onClick={logout}>Log Out</button>
             </li>

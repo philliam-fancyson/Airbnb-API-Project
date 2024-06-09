@@ -43,21 +43,22 @@ function UpdateSpotForm() {
     }, [dispatch, spotId])
 
     useEffect(() => {
-        const errors = {};
-        if (!address.length) errors.address = "Street Address is required";
-        if (!city.length) errors.city = "City is required";
-        if (!state.length) errors.state = "State is required";
-        if (!country.length) errors.country = "Country is required";
-        if (lat < -90 || lat > 90) errors.lat = "Latitude must be within -90 and 90";
-        if (lng < -180 || lng > 180) errors.lng = "Longitude must be within -180 and 180";
-        if (!name.length) errors.name = "Name is required";
-        if (name.length > 50) errors.name = "Name must be less than 50 characters";
-        if (!description.length) errors.description = "Description is required";
-        if (price < 0) errors.price = "Price per day must be a positive number";
-        if (!image1.length) errors.image1 = "Preview Image is required";
+            const errors = {};
+            if (!address.length) errors.address = "Street Address is required";
+            if (!city.length) errors.city = "City is required";
+            if (!state.length) errors.state = "State is required";
+            if (!country.length) errors.country = "Country is required";
+            if (lat < -90 || lat > 90) errors.lat = "Latitude must be within -90 and 90";
+            if (lng < -180 || lng > 180) errors.lng = "Longitude must be within -180 and 180";
+            if (!name.length) errors.name = "Name is required";
+            if (name.length > 50) errors.name = "Name must be less than 50 characters";
+            if (!description.length) errors.description = "Description is required";
+            if (price < 0) errors.price = "Price per day must be a positive number";
+            if (!image1.length) errors.image1 = "Preview Image is required";
 
-       setValidationErrors(errors);
+            setValidationErrors(errors);
     }, [address, city, state, country, lat, lng, name, description, price, image1])
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();

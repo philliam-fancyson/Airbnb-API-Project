@@ -9,29 +9,21 @@
 }
 
 .spot-grid {
-    justify-content: space-between;
-    justify-self: center;
-    width: 100%;
     margin: 10px;
+    /* position: relative; */
 }
 
 .in-line {
-    width: 100%
+    flex: 1;
+    display: inline-flex;
+    justify-content: space-between;
+    justify-self: center;
+    width: 300px
 }
 
-.in-line h2{
-    justify-self: flex-end;
-}
+
 
 h2 {
     font-size: 14px;
     font-weight: medium
 }
-
-/* .left {
-    float:left
-}
-
-.right {
-    float: right
-} */
