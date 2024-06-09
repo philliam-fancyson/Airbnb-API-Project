@@ -3,7 +3,7 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 import { getASpot } from "../../store/spot";
 import { updateSpot } from "../../store/spot";
-// TODO: Add Put request
+import './Form.css'
 
 function UpdateSpotForm() {
     const { spotId } = useParams();
@@ -20,7 +20,7 @@ function UpdateSpotForm() {
 
     // Spot Information
     const [address, setAddress] = useState(spot.address)
-    const [city, setCity] = useState(spot.country)
+    const [city, setCity] = useState(spot.city)
     const [state, setState] = useState(spot.state)
     const [country, setCountry] = useState(spot.country)
     const [lat, setLat] = useState(spot.lat)
@@ -56,8 +56,6 @@ function UpdateSpotForm() {
         if (price < 0) errors.price = "Price per day must be a positive number";
         if (!image1.length) errors.image1 = "Preview Image is required";
 
-
-
        setValidationErrors(errors);
     }, [address, city, state, country, lat, lng, name, description, price, image1])
 
@@ -79,7 +77,7 @@ function UpdateSpotForm() {
             price,
         };
 
-        await dispatch(updateSpot(payload, spotId));
+        dispatch(updateSpot(payload, spotId));
 
         // TODO: Spot Image for replacing preview image and 2-5; grab the spot image id, delete and then add the image for them
         // const previewImage = {url: image1, preview: true, spotId: createdSpot.id};
@@ -96,8 +94,6 @@ function UpdateSpotForm() {
 
         navigate(`/spots/${spotId}`);
     };
-
-    //TODO Maybe: Update Spot
 
     if (!spot) {
         return null;
@@ -121,7 +117,7 @@ function UpdateSpotForm() {
                     onChange={(e) => setCountry(e.target.value)}
                 />
             </label>
-            <p>
+            <p className="error">
                 {hasSubmitted && validationErrors.country}
             </p>
             <label>
@@ -133,7 +129,7 @@ function UpdateSpotForm() {
                     onChange={(e) => setAddress(e.target.value)}
                 />
             </label>
-            <p>
+            <p className="error">
                 {hasSubmitted && validationErrors.address}
             </p>
             <label>
@@ -145,7 +141,7 @@ function UpdateSpotForm() {
                     onChange={(e) => setCity(e.target.value)}
                 />{`, `}
             </label>
-            <p>
+            <p className="error">
                 {hasSubmitted && validationErrors.city}
             </p>
             <label>
@@ -157,7 +153,7 @@ function UpdateSpotForm() {
                     onChange={(e) => setState(e.target.value)}
                 />
             </label>
-            <p>
+            <p className="error">
                 {hasSubmitted && validationErrors.state}
             </p>
             <label>
@@ -169,7 +165,7 @@ function UpdateSpotForm() {
                     onChange={(e) => setLat(e.target.value)}
                 />{`, `}
             </label>
-            <p>
+            <p className="error">
                 {hasSubmitted && validationErrors.lat}
             </p>
             <label>
@@ -181,7 +177,7 @@ function UpdateSpotForm() {
                     onChange={(e) => setLng(e.target.value)}
                 />
             </label>
-            <p>
+            <p className="error">
                 {hasSubmitted && validationErrors.lng}
             </p>
             <div className="spot-description">
@@ -194,7 +190,7 @@ function UpdateSpotForm() {
                     placeholder="Please write at least 30 characters"
                     onChange={(e) => setDescription(e.target.value)}
                 />
-                <p>
+                <p className="error">
                     {hasSubmitted && validationErrors.description}
                 </p>
             </div>
@@ -208,7 +204,7 @@ function UpdateSpotForm() {
                     placeholder="Name of your Spot"
                     onChange={(e) => setName(e.target.value)}
                 />
-                <p>
+                <p className="error">
                 {hasSubmitted && validationErrors.name}
             </p>
             </div>
@@ -223,7 +219,7 @@ function UpdateSpotForm() {
                     onChange={(e) => setPrice(e.target.value)}
                 />
             </div>
-            <p>
+            <p className="error">
                 {hasSubmitted && validationErrors.price}
             </p>
             <div className="spot-photos">
@@ -236,7 +232,7 @@ function UpdateSpotForm() {
                     placeholder="Preview Image URL"
                     onChange={(e) => setImage1(e.target.value)}
                 />
-                <p>
+                <p className="error">
                 {hasSubmitted && validationErrors.image1}
                 </p>
                 <input

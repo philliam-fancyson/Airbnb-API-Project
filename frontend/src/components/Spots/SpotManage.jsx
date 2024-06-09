@@ -37,10 +37,6 @@ function ManageSpots() {
 
     const closeMenu = () => setShowMenu(false);
 
-    const loadSpot = (spotId) => {
-        dispatch(getASpot(spotId))
-    }
-
     if (!userSpots) {
         return <div>Loading...</div>
     }
@@ -49,14 +45,14 @@ function ManageSpots() {
         <>
             <div>
                 <h2>Manage Your Spots</h2>
-                <Link to='/spots/new'><button>Create a New Spot</button></Link>
             </div>
+            {!userSpots.length && <Link to='/spots/new'><button>Create a New Spot</button></Link>}
             {userSpots &&<div className="manage-grid">
                 {userSpots && userSpots.map((spot, index) =>
                         <div key={index} className="spot-grid">
                             <Link to={`/spots/${spot.id}`}>
                             {/* <Tooltip id="my-tooltip"> */}
-                            <img src={spot.previewImage ? "https://picsum.photos/250/300" : "https://picsum.photos/250/300"} />
+                            <img src={spot.previewImage} />
                             {/* </Tooltip> */}
                             <div className="in-line">
                                 <h2 style={{"textAlign": "left", "width": "49%"}}>{spot.city}, {spot.state}</h2>
@@ -64,7 +60,7 @@ function ManageSpots() {
                             </div>
                             <p>{`$${spot.price} night`}</p>
                             </Link>
-                            <Link to={`/spots/${spot.id}/edit`}><button onClick={loadSpot(spot.id)}>Update</button></Link>
+                            <Link to={`/spots/${spot.id}/edit`}><button>Update</button></Link>
                             <OpenModalButton
                                 buttonText="Delete"
                                 onButtonClick={closeMenu}

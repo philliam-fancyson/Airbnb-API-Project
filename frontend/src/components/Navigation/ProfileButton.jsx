@@ -14,6 +14,8 @@ function ProfileButton({ user }) {
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
 
+  console.log(user)
+
   const toggleMenu = (e) => {
     e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
     setShowMenu(!showMenu);
@@ -42,14 +44,7 @@ function ProfileButton({ user }) {
     navigate('/')
   };
 
-  const loginDemo = (e) => {
-    e.preventDefault();
-    dispatch(sessionActions.login({credential: "Demoman", password: "kaboom"}));
-    closeMenu();
-    navigate('/')
-  }
-
-  const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
+  const ulClassName = "profile-dropdown" + (showMenu ? " isActive" : " hidden");
 
   return (
     <>
@@ -80,10 +75,10 @@ function ProfileButton({ user }) {
                 onButtonClick={closeMenu}
                 modalComponent={<SignupFormModal />}
               />
-              <button onClick={loginDemo}>Log in as Demo User</button>
           </>
         )}
       </ul>
+
     </ >
   );
 }

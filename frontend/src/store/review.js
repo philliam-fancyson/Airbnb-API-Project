@@ -86,7 +86,6 @@ const reviewReducer = (state = initialState, action) => {
     let updatedReviews;
     switch(action.type) {
         case LOAD_REVIEWS:
-            console.log(action.reviews)
             if (!action.reviews) {
                 newState = {...state, reviews: []}
                 return newState

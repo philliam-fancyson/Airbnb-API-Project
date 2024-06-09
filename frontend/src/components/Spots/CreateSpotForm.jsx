@@ -3,6 +3,7 @@ import { Navigate, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 import { addASpot } from "../../store/spot";
 import { addImageToSpot } from "../../store/spot";
+import './Form.css'
 
 
 function CreateSpotForm() {
@@ -106,7 +107,7 @@ function CreateSpotForm() {
                     onChange={(e) => setCountry(e.target.value)}
                 />
             </label>
-            <p>
+            <p className="error">
                 {hasSubmitted && validationErrors.country}
             </p>
             <label>
@@ -118,7 +119,7 @@ function CreateSpotForm() {
                     onChange={(e) => setAddress(e.target.value)}
                 />
             </label>
-            <p>
+            <p className="error">
                 {hasSubmitted && validationErrors.address}
             </p>
             <label>
@@ -130,7 +131,7 @@ function CreateSpotForm() {
                     onChange={(e) => setCity(e.target.value)}
                 />{`, `}
             </label>
-            <p>
+            <p className="error">
                 {hasSubmitted && validationErrors.city}
             </p>
             <label>
@@ -142,7 +143,7 @@ function CreateSpotForm() {
                     onChange={(e) => setState(e.target.value)}
                 />
             </label>
-            <p>
+            <p className="error">
                 {hasSubmitted && validationErrors.state}
             </p>
             <label>
@@ -154,7 +155,7 @@ function CreateSpotForm() {
                     onChange={(e) => setLat(e.target.value)}
                 />{`, `}
             </label>
-            <p>
+            <p className="error">
                 {hasSubmitted && validationErrors.lat}
             </p>
             <label>
@@ -166,7 +167,7 @@ function CreateSpotForm() {
                     onChange={(e) => setLng(e.target.value)}
                 />
             </label>
-            <p>
+            <p className="error">
                 {hasSubmitted && validationErrors.lng}
             </p>
             <div className="spot-description">
@@ -179,7 +180,7 @@ function CreateSpotForm() {
                     placeholder="Please write at least 30 characters"
                     onChange={(e) => setDescription(e.target.value)}
                 />
-                <p>
+                <p className="error">
                     {hasSubmitted && validationErrors.description}
                 </p>
             </div>
@@ -193,9 +194,9 @@ function CreateSpotForm() {
                     placeholder="Name of your Spot"
                     onChange={(e) => setName(e.target.value)}
                 />
-                <p>
+                <p className="error">
                 {hasSubmitted && validationErrors.name}
-            </p>
+                </p>
             </div>
             <div className="spot-price">
                 <h3>Set a base price for your spot</h3>
@@ -208,7 +209,7 @@ function CreateSpotForm() {
                     onChange={(e) => setPrice(e.target.value)}
                 />
             </div>
-            <p>
+            <p className="error">
                 {hasSubmitted && validationErrors.price}
             </p>
             <div className="spot-photos">
@@ -221,7 +222,7 @@ function CreateSpotForm() {
                     placeholder="Preview Image URL"
                     onChange={(e) => setImage1(e.target.value)}
                 />
-                <p>
+                <p className="error">
                 {hasSubmitted && validationErrors.image1}
                 </p>
                 <input

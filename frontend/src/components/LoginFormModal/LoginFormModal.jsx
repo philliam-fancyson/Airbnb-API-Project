@@ -20,6 +20,13 @@ function LoginFormModal() {
     setValidationErrors(errors);
   }, [credential, password])
 
+  const loginDemo = (e) => {
+    e.preventDefault();
+    dispatch(sessionActions.login({credential: "Demoman", password: "kaboom"}));
+    closeModal();
+    navigate('/')
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors({});
@@ -60,6 +67,7 @@ function LoginFormModal() {
         )}
         <button type="submit" disabled={Object.keys(validationErrors).length}>Log In</button>
       </form>
+      <button onClick={loginDemo}>Log in as Demo User</button>
     </>
   );
 }
