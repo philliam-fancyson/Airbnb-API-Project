@@ -18,10 +18,18 @@
     display: inline-flex;
     justify-content: space-between;
     justify-self: center;
-    width: 300px
+    width: 300px;
+    height: 60px;
 }
 
+a {
+    text-decoration: none;
+}
 
+svg {
+    position: abolute;
+    padding-right: 10px;
+}
 
 h2 {
     font-size: 14px;

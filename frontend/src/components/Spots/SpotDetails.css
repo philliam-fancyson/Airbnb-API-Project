@@ -19,3 +19,30 @@
     width: 30%;
     margin-left: 10px;
 }
+
+#text {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#spot-callout-box p {
+    display: inline-flex
+}
+
+#price {
+    font-weight: bold;
+}
+
+#button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#spot-callout-box button {
+    width: 100%;
+    margin: auto 10px;
+    height: 30px;
+}
