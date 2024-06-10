@@ -68,7 +68,7 @@ function SpotDetails () {
     }
 
     // TODO: Spot Button
-    if (!spot || !reviews) {
+    if (!spot || !reviews || !spot.SpotImages) {
         return <div>Loading...</div>
     }
 
@@ -78,7 +78,7 @@ function SpotDetails () {
             <h3>{spot.city}, {spot.state}, {spot.country}</h3>
             <div id="spot-image-gallery">
                 <figure id="preview-image">
-                    <img className="gallery-image" src={spot.SpotImages ? spot.SpotImages[0].url : ""} />
+                    <img className="gallery-image" src={spot.SpotImages[0] ? spot.SpotImages[0].url : ""} />
                 </figure>
                 <figure id="image-1">
                     <img className="gallery-image" src={spot.SpotImages[1] ? spot.SpotImages[1].url : ""} />
