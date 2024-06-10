@@ -67,7 +67,6 @@ function SpotDetails () {
         window.alert("Feature Coming Soon...")
     }
 
-    // TODO: CSS for image gallery
     // TODO: Spot Button
     if (!spot || !reviews) {
         return <div>Loading...</div>
@@ -78,7 +77,21 @@ function SpotDetails () {
             <h2>{spot.name}</h2>
             <h3>{spot.city}, {spot.state}, {spot.country}</h3>
             <div id="spot-image-gallery">
-                <img src={spot.SpotImages ? spot.SpotImages[0].url : ""} />
+                <figure id="preview-image">
+                    <img className="gallery-image" src={spot.SpotImages ? spot.SpotImages[0].url : ""} />
+                </figure>
+                <figure id="image-1">
+                    <img className="gallery-image" src={spot.SpotImages[1] ? spot.SpotImages[1].url : ""} />
+                </figure>
+                <figure id="image-2">
+                 <img className="gallery-image" src={spot.SpotImages[2] ? spot.SpotImages[2].url : ""} />
+                </figure>
+                <figure id="image-3">
+                    <img className="gallery-image" src={spot.SpotImages[3] ? spot.SpotImages[3].url : ""} />
+                </figure>
+                <figure id="image-4">
+                    <img className="gallery-image"src={spot.SpotImages[4] ? spot.SpotImages[4].url : ""} />
+                </figure>
             </div>
             <div id="spot-description-box">
                 <div id ="spot-description">
