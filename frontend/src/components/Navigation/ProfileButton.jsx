@@ -46,36 +46,39 @@ function ProfileButton({ user }) {
 
   return (
     <>
-        <CgProfile
+      <CgProfile
             onClick={toggleMenu}
             className="dropdown-icon"
             style={{"color": "#FF5A5F"}}
-        />
+      />
+
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
             <li>Hello {user.firstName}</li>
             <li>{user.email}</li>
-            <li><Link to='/spots/manage'><button onClick={closeMenu}>Manage Spots</button></Link></li>
-            <li>
-              <button onClick={logout}>Log Out</button>
-            </li>
+            <div className="buttons">
+            <Link to='/spots/manage'><button onClick={closeMenu}>Manage Spots</button></Link>
+            <button onClick={logout}>Log Out</button>
+            </div>
+
           </>
         ) : (
           <>
               <OpenModalMenuItem
                 itemText="Log In"
-                onButtonClick={closeMenu}
+                onItemClick={closeMenu}
                 modalComponent={<LoginFormModal />}
-              />
+                />
               <OpenModalMenuItem
                 itemText="Sign Up"
-                onButtonClick={closeMenu}
+                onItemClick={closeMenu}
                 modalComponent={<SignupFormModal />}
-              />
+                />
           </>
         )}
       </ul>
+
 
     </ >
   );

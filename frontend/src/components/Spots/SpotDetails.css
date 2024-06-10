@@ -46,3 +46,11 @@
     margin: auto 10px;
     height: 30px;
 }
+
+#spot-details svg {
+    margin-right: -10px;
+}
+
+#star {
+    padding-right: 15px;
+}

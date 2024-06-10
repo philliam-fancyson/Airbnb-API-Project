@@ -7,9 +7,8 @@
     position: absolute;
     border: 1px solid black;
     background-color: white;
-    right: 0;
+    margin-right: 20px;
     margin-top: 50px;
-    z-index: 1;
 }
 
 .dropdown-icon {
@@ -20,4 +19,31 @@
 /* This stretches across, change size of li or only apply to text */
 .dropdown-icon-small {
     cursor: pointer
+}
+
+.profile-dropdown {
+    right: 0;
+    height: auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.profile-dropdown li {
+    translate: -20px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    font-weight: bold;
+}
+
+.buttons {
+    translate: -20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.buttons button {
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
+    border-radius: 7px;
+    cursor: pointer;
 }

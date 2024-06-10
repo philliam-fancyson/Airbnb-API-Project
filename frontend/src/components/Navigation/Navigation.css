@@ -7,15 +7,15 @@
 
 }
 
-#navBar ul {
+#navBar-right ul {
     list-style-type: none;
   }
 
-
 #navBar-left {
     align-items: center;
-    justify-content: left;
 }
+
+
 
 #navBar-right {
     display: inline-flex;

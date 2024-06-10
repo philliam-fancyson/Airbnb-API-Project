@@ -1,9 +1,54 @@
-h1 {
-    color: #3e4684
+#modal-content {
+    border-radius: 25px;
+    top: 0;
+    margin-top: 100px;
 }
 
-label {
-    color: #5E5E5E
+#sign-up {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 400px;
+    height: auto;
+    border-radius: 25px;
 }
 
-button {cursor: pointer}
+#sign-up form {
+    display: flex;
+    flex-direction: column;
+}
+
+#sign-up h1 {
+    color: black
+}
+
+#sign-up label {
+    display: flex;
+    flex-direction: column;
+    justify-self: auto;
+    align-items: center;
+    color: #5E5E5E;
+    padding-top: 10px;
+    width: 350px;
+}
+
+#sign-up input {
+    width: 350px;
+}
+
+#sign-up button {
+    justify-content: center;
+    align-items: center;
+    cursor: pointer
+}
+
+#sign-up-button {
+    align-self: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 350px;
+    height: 50px;
+    border: 1px solid black;
+    box-shadow: gray 2px 3px 1px 0.5px;
+}

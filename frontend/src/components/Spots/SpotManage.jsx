@@ -50,9 +50,7 @@ function ManageSpots() {
                 {userSpots && userSpots.map((spot, index) =>
                         <div key={index} className="spot-grid">
                             <Link to={`/spots/${spot.id}`}>
-                            {/* <Tooltip id="my-tooltip"> */}
                             <img src={spot.previewImage} />
-                            {/* </Tooltip> */}
                             <div className="in-line">
                                 <h2 style={{"textAlign": "left", "width": "49%"}}>{spot.city}, {spot.state}</h2>
                                 <p style={{"textAlign": "right", "width": "49%"}}>{spot.avgRating ? <><FaStar />{parseInt(spot.avgRating).toFixed(1)}</>: <><FaStar /> New</>}</p>

@@ -13,8 +13,8 @@ function Navigation({ isLoaded }) {
         </ div>
         <div id='navBar-right'>
         {sessionUser && (
-          <div>
-            <NavLink to="/spots/new">Create a New Spot</NavLink>
+          <div id="spot-create">
+            <NavLink to="/spots/new" style={{"paddingRight": "10px"}}>Create a New Spot</NavLink>
           </ div>
         )}
         {isLoaded && (

@@ -88,7 +88,7 @@ function SpotDetails () {
                 <div id="spot-callout-box">
                     <div id="text">
                         <p id="price">${spot.price}</p>
-                        <p>{Number(avgStars) ? <><FaStar /> {avgStars} </>: <><FaStar />{"New"}</>} {numReviews !== 0 ? <><LuDot /> {(numReviews === 1 ? numReviews + " review" : numReviews + " reviews")}</> : null} </p>
+                        <p id="review">{Number(avgStars) ? <><FaStar id="star"/> {avgStars} </>: <><FaStar id="star"/>{"New"}</>} {numReviews !== 0 ? <><LuDot /> {(numReviews === 1 ? numReviews + " review" : numReviews + " reviews")}</> : null} </p>
                     </div>
                     <div id="button">
                         <button onClick={handleClick}>Reserve</button>
