@@ -46,25 +46,28 @@ function ManageSpots() {
                 <h2>Manage Your Spots</h2>
             </div>
             {!userSpots.length && <Link to='/spots/new'><button>Create a New Spot</button></Link>}
-            {userSpots &&<div className="manage-grid">
+            {userSpots && <div className="manage-grid">
                 {userSpots && userSpots.map((spot, index) =>
+                    <>
                         <div key={index} className="spot-grid">
-                            <Link to={`/spots/${spot.id}`}>
-                            <img src={spot.previewImage} />
-                            <div className="in-line">
-                                <h2 style={{"textAlign": "left", "width": "49%"}}>{spot.city}, {spot.state}</h2>
-                                <p style={{"textAlign": "right", "width": "49%"}}>{spot.avgRating ? <><FaStar />{parseInt(spot.avgRating).toFixed(1)}</>: <><FaStar /> New</>}</p>
+                        <Link to={`/spots/${spot.id}`}>
+                                <img src={spot.previewImage}/>
+                                    <div className="in-line">
+                                        <p>{spot.city}, {spot.state}</p>
+                                        <p>{spot.avgRating ? <><FaStar />{parseInt(spot.avgRating).toFixed(1)}</>: <><FaStar /> New</>}</p>
+                                    </div>
+                                <p>{`$${spot.price} night`}</p>
+                        </Link>
+                            <div id="buttons">
+                                <Link to={`/spots/${spot.id}/edit`}><button>Update</button></Link>
+                                <OpenModalButton
+                                    buttonText="Delete"
+                                    onButtonClick={closeMenu}
+                                    modalComponent={<DeleteSpotModal spotId={spot.id}/>}
+                                    />
                             </div>
-                            <p>{`$${spot.price} night`}</p>
-                            </Link>
-                            <Link to={`/spots/${spot.id}/edit`}><button>Update</button></Link>
-                            <OpenModalButton
-                                buttonText="Delete"
-                                onButtonClick={closeMenu}
-                                modalComponent={<DeleteSpotModal spotId={spot.id}/>}
-                            />
                         </div>
-
+                    </>
                 )}
             </div>}
         </>

@@ -1,35 +1,23 @@
 .manage-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    margin: auto 10px;
+    justify-content: center;
+    align-items: center;
 }
 
 .spot-grid {
     display:grid;
     justify-content: space-between;
     justify-self: center;
-    width: 100%
+    width: 100%;
+    margin: 10px;
 }
 
-.in-line h2{
-    justify-self: flex-end;
+#buttons button {
+    display: inline-flex;
+    justify-content: space-between;
+    margin-right: 10px;
 }
-
-a {
-    width: 100%
-}
-
-
-h2 {
-    font-size: 14px;
-    font-weight: medium
-}
-
-/* .left {
-    float:left
-}
-
-.right {
-    float: right
-} */
