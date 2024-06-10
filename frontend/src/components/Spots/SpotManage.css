@@ -16,6 +16,11 @@
     margin: 10px;
 }
 
+.spot-grid img {
+    height: 250px;
+    width: 300px;
+}
+
 #buttons button {
     display: inline-flex;
     justify-content: space-between;

@@ -1,0 +1,13 @@
+#delete-spot {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 10px
+}
+
+#delete-spot button {
+    height: 50px;
+    width: 350px;
+    margin: 5px 0px;
+}
